@@ -183,7 +183,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                 </span>
               </div>
               <div id="toolbarViewerRight" class="toolbarHorizontalGroup">
-                <div id="editorModeButtons" class="toolbarHorizontalGroup" role="radiogroup" <?php if ($_GET["editButtons"]!=="true") { echo 'style="display:none;"'; } ?>>
+                <div id="editorModeButtons" class="toolbarHorizontalGroup" role="radiogroup" <?php if (isset($_GET["editButtons"]) && $_GET["editButtons"]!=="true") { echo 'style="display:none;"'; } ?>>
                   <div id="editorSignature" class="toolbarButtonWithContainer" hidden="true">
                     <button id="editorSignatureButton" class="toolbarButton" type="button" tabindex="0" disabled="disabled" role="radio" aria-expanded="false" aria-haspopup="true" aria-controls="editorSignatureParamsToolbar" data-l10n-id="pdfjs-editor-signature-button">
                       <span data-l10n-id="pdfjs-editor-signature-button-label"></span>
