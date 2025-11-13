@@ -216,3 +216,16 @@ msgstr ""
 #: templates/fullscreen.php:11
 msgid "PDF Viewer"
 msgstr ""
+
+#: inc/render-viewer.php:96
+msgid "Security Error:"
+msgstr ""
+
+#: inc/render-viewer.php:97
+msgid "PDF files must be hosted on the same domain as this site."
+msgstr ""
+
+#. translators: 1: PDF URL host, 2: Current site host
+#: inc/render-viewer.php:101
+msgid "PDF is hosted on: %1$s but this site is: %2$s"
+msgstr ""

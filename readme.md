@@ -70,6 +70,7 @@ This plugin can be installed either directly from your WordPress admin panel by 
 
 ### 2.2.4
 
+-   Added message so if the user is trying to load external PDFs, they'll get a warning.
 -   Translation Support: Added internationalization support
     -   Included Spanish (es_ES) and French (fr_FR) translations
     -   Added translation template (POT file) for additional languages

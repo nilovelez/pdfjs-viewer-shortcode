@@ -73,6 +73,39 @@ function pdfjs_render_viewer( $args ) {
 		$file_url = esc_url( $file_url );
 	}
 
+	// Validate PDF URL matches current site domain for security.
+	$site_url = get_site_url();
+	$parsed_site = parse_url( $site_url );
+	$parsed_file = parse_url( $file_url );
+
+	// Build origins including protocol for clearer messaging.
+	$site_origin = $site_url;
+	if ( ! empty( $parsed_site['host'] ) ) {
+		$site_origin = ( ! empty( $parsed_site['scheme'] ) ? $parsed_site['scheme'] . '://' : '' ) . $parsed_site['host'] . ( ! empty( $parsed_site['port'] ) ? ':' . $parsed_site['port'] : '' );
+	}
+
+	$file_origin = $file_url;
+	if ( ! empty( $parsed_file['host'] ) ) {
+		$file_origin = ( ! empty( $parsed_file['scheme'] ) ? $parsed_file['scheme'] . '://' : '' ) . $parsed_file['host'] . ( ! empty( $parsed_file['port'] ) ? ':' . $parsed_file['port'] : '' );
+	}
+	
+	// Check if PDF URL has a different host than the current site.
+	if ( ! empty( $parsed_file['host'] ) && $parsed_file['host'] !== $parsed_site['host'] ) {
+		// External URL detected - return error message with details.
+		return '<div class="pdfjs-error" style="padding: 20px; border: 2px solid #dc3232; background: #f8d7da; color: #721c24; margin: 20px 0;">' .
+			'<p style="margin: 0 0 10px 0;"><strong>' . esc_html__( 'Security Error:', 'pdfjs-viewer-shortcode' ) . '</strong> ' .
+			esc_html__( 'PDF files must be hosted on the same domain as this site.', 'pdfjs-viewer-shortcode' ) . '</p>' .
+			'<p style="margin: 0; font-size: 0.9em;">' .
+			sprintf(
+				/* translators: 1: PDF URL host, 2: Current site host */
+				esc_html__( 'PDF is hosted on: %1$s but this site is: %2$s', 'pdfjs-viewer-shortcode' ),
+				'<code>' . esc_html( $file_origin ) . '</code>',
+				'<code>' . esc_html( $site_origin ) . '</code>'
+			) .
+			'</p>' .
+			'</div>';
+	}
+
 	// Normalize dimensions.
 	if ( '0' === $viewer_width || 0 === $viewer_width ) {
 		$viewer_width = '100%';

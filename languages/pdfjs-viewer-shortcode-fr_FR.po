@@ -219,3 +219,16 @@ msgstr "Insérer"
 #: templates/fullscreen.php:11
 msgid "PDF Viewer"
 msgstr "Visionneuse PDF"
+
+#: inc/render-viewer.php:96
+msgid "Security Error:"
+msgstr "Erreur de sécurité :"
+
+#: inc/render-viewer.php:97
+msgid "PDF files must be hosted on the same domain as this site."
+msgstr "Les fichiers PDF doivent être hébergés sur le même domaine que ce site."
+
+#. translators: 1: PDF URL host, 2: Current site host
+#: inc/render-viewer.php:101
+msgid "PDF is hosted on: %1$s but this site is: %2$s"
+msgstr "Le PDF est hébergé sur : %1$s mais ce site est : %2$s"
