@@ -268,11 +268,7 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 					/>
 				</PanelBody>
 			</InspectorControls>,
-			<div
-				className="pdfjs-wrapper components-placeholder"
-				key="i2"
-				style={ { height: props.attributes.viewerHeight } }
-			>
+			<div className="pdfjs-wrapper components-placeholder" key="i2">
 				<div>
 					<strong>
 						{ __( 'PDF.js Embed', 'pdfjs-viewer-shortcode' ) }
