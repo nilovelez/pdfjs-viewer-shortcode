@@ -80,8 +80,24 @@ msgstr ""
 msgid "Remove PDF"
 msgstr ""
 
+#: blocks/src/block/block.js:289
+msgid "Remove the current PDF file"
+msgstr ""
+
 #: blocks/src/block/block.js:297
 msgid "Choose a PDF file"
+msgstr ""
+
+#: blocks/src/block/block.js:301
+msgid "Open media library to choose a PDF file"
+msgstr ""
+
+#: blocks/src/block/block.js:325
+msgid "PDF Preview"
+msgstr ""
+
+#: blocks/src/block/block.js:342
+msgid "PDF document preview"
 msgstr ""
 
 #: inc/custom-page.php:9
@@ -90,6 +106,23 @@ msgstr ""
 
 #: inc/media-button.php:14
 msgid "Add PDF"
+msgstr ""
+
+#: inc/media-button.php:17
+msgid "Add PDF to content"
+msgstr ""
+
+#: inc/render-viewer.php:99
+msgid "Open PDF in fullscreen mode"
+msgstr ""
+
+#: inc/render-viewer.php:106
+msgid "PDF Viewer"
+msgstr ""
+
+#. translators: %s: PDF file name
+#: inc/render-viewer.php:112
+msgid "PDF document: %s"
 msgstr ""
 
 #: inc/options-page.php:55
@@ -152,6 +185,14 @@ msgstr ""
 msgid "Alternative PDF Loading"
 msgstr ""
 
+#: inc/options-page.php:154
+msgid "leave feedback"
+msgstr ""
+
+#: inc/options-page.php:154
+msgid "on how it works."
+msgstr ""
+
 #: inc/options-page.php:159
 msgid "When editing existing content, it may cause existing blocks to have \"unexpected or invalid content\" upon editing. Don't worry, just click the three little dots, choose \"Attempt Block Recovery\", and everything should be working again. This \"unexpected or invalid content\" will not affect live content, just content in the editor."
 msgstr ""
@@ -162,4 +203,16 @@ msgstr ""
 
 #: inc/options-page.php:183
 msgid "Settings"
+msgstr ""
+
+#: pdfjs-media-button.js:14
+msgid "Insert a PDF"
+msgstr ""
+
+#: pdfjs-media-button.js:17
+msgid "Insert"
+msgstr ""
+
+#: templates/fullscreen.php:11
+msgid "PDF Viewer"
 msgstr ""

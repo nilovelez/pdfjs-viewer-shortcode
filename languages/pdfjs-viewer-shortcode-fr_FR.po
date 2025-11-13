@@ -83,9 +83,25 @@ msgstr "Intégration PDF.js"
 msgid "Remove PDF"
 msgstr "Supprimer le PDF"
 
+#: blocks/src/block/block.js:289
+msgid "Remove the current PDF file"
+msgstr "Supprimer le fichier PDF actuel"
+
 #: blocks/src/block/block.js:297
 msgid "Choose a PDF file"
 msgstr "Choisir un fichier PDF"
+
+#: blocks/src/block/block.js:301
+msgid "Open media library to choose a PDF file"
+msgstr "Ouvrir la bibliothèque de médias pour choisir un fichier PDF"
+
+#: blocks/src/block/block.js:325
+msgid "PDF Preview"
+msgstr "Aperçu du PDF"
+
+#: blocks/src/block/block.js:342
+msgid "PDF document preview"
+msgstr "Aperçu du document PDF"
 
 #: inc/custom-page.php:9
 msgid "Security Check Failed"
@@ -94,6 +110,23 @@ msgstr "Échec de la vérification de sécurité"
 #: inc/media-button.php:14
 msgid "Add PDF"
 msgstr "Ajouter un PDF"
+
+#: inc/media-button.php:17
+msgid "Add PDF to content"
+msgstr "Ajouter un PDF au contenu"
+
+#: inc/render-viewer.php:99
+msgid "Open PDF in fullscreen mode"
+msgstr "Ouvrir le PDF en mode plein écran"
+
+#: inc/render-viewer.php:106
+msgid "PDF Viewer"
+msgstr "Visionneuse PDF"
+
+#. translators: %s: PDF file name
+#: inc/render-viewer.php:112
+msgid "PDF document: %s"
+msgstr "Document PDF : %s"
 
 #: inc/options-page.php:55
 msgid "You do not have sufficient permissions to access this page."
@@ -155,6 +188,14 @@ msgstr "Mode de page (barre latérale)"
 msgid "Alternative PDF Loading"
 msgstr "Chargement PDF alternatif"
 
+#: inc/options-page.php:154
+msgid "leave feedback"
+msgstr "laisser un commentaire"
+
+#: inc/options-page.php:154
+msgid "on how it works."
+msgstr "sur son fonctionnement."
+
 #: inc/options-page.php:159
 msgid "When editing existing content, it may cause existing blocks to have \"unexpected or invalid content\" upon editing. Don't worry, just click the three little dots, choose \"Attempt Block Recovery\", and everything should be working again. This \"unexpected or invalid content\" will not affect live content, just content in the editor."
 msgstr "Lors de la modification de contenu existant, cela peut entraîner l'apparition de \"contenu inattendu ou non valide\" dans les blocs existants. Ne vous inquiétez pas, cliquez simplement sur les trois petits points, choisissez \"Tentative de récupération du bloc\" et tout devrait fonctionner à nouveau. Ce \"contenu inattendu ou non valide\" n'affectera pas le contenu en direct, seulement le contenu dans l'éditeur."
@@ -166,3 +207,15 @@ msgstr "Ces options ne sont pas personnalisables par page/publication pour le mo
 #: inc/options-page.php:183
 msgid "Settings"
 msgstr "Paramètres"
+
+#: pdfjs-media-button.js:14
+msgid "Insert a PDF"
+msgstr "Insérer un PDF"
+
+#: pdfjs-media-button.js:17
+msgid "Insert"
+msgstr "Insérer"
+
+#: templates/fullscreen.php:11
+msgid "PDF Viewer"
+msgstr "Visionneuse PDF"

@@ -4,7 +4,7 @@
 -   Tags: pdf, pdfjs, viewer, embed, mozilla
 -   Requires at least: 4.9
 -   Tested up to: 6.8.2
--   Stable tag: 2.2.5
+-   Stable tag: 2.2.4
 -   License: GPLv2 or later
 -   License URI: http://www.gnu.org/licenses/gpl-2.0.html
 -   Requires PHP: 7.2
@@ -68,7 +68,7 @@ This plugin can be installed either directly from your WordPress admin panel by 
 
 ## Changelog
 
-### 2.2.5
+### 2.2.4
 
 -   Translation Support: Added internationalization support
     -   Included Spanish (es_ES) and French (fr_FR) translations
@@ -89,11 +89,8 @@ This plugin can be installed either directly from your WordPress admin panel by 
 -   Added `.nvmrc` for Node version management
 -   Enhanced `.gitignore` for build outputs
 -   Improved developer documentation in README
-
-### 2.2.4
-
 -   Fixed PHP Warning: Undefined array key "editButtons" thanks to retroflexer
--   PDF in Gutenberg block
+-   PDF preview in Gutenberg block
 
 ### 2.2.3
 

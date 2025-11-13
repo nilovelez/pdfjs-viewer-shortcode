@@ -8,12 +8,13 @@
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "wp-scripts build blocks/src/index.js --output-path=blocks/build",
+		"build": "wp-scripts build blocks/src/index.js --output-path=blocks/build && npm run readme",
 		"start": "wp-scripts start blocks/src/index.js --output-path=blocks/build",
 		"lint:js": "wp-scripts lint-js blocks/src",
 		"lint:css": "wp-scripts lint-style blocks/src",
 		"format": "wp-scripts format",
-		"makepot": "wp i18n make-pot . languages/pdfjs-viewer-shortcode.pot --domain=pdfjs-viewer-shortcode --exclude=node_modules,vendor"
+		"makepot": "wp i18n make-pot . languages/pdfjs-viewer-shortcode.pot --domain=pdfjs-viewer-shortcode --exclude=node_modules,vendor",
+		"readme": "cp readme.md readme.txt"
 	},
 	"repository": {
 		"type": "git",

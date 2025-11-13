@@ -4,7 +4,7 @@
 -   Tags: pdf, pdfjs, viewer, embed, mozilla
 -   Requires at least: 4.9
 -   Tested up to: 6.8.2
--   Stable tag: 2.2.3
+-   Stable tag: 2.2.4
 -   License: GPLv2 or later
 -   License URI: http://www.gnu.org/licenses/gpl-2.0.html
 -   Requires PHP: 7.2
@@ -18,6 +18,7 @@ Incorporate [Mozilla's PDF.js](https://github.com/mozilla/pdf.js/) viewer into y
 Features:
 
 -   Gutenberg Block and Shortcode
+-   Translation Support (plugin only): Spanish and French included, ready for more languages
 -   Elegant Theme that adapts to dark and light mode (if browser supports dynamic CSS)
 -   Customizable buttons
 -   Page navigation drawer
@@ -30,19 +31,32 @@ Features:
 
 Shortcode Syntax:
 
-`[pdfjs-viewer url=http://www.website.com/test.pdf viewer_width=600px viewer_height=700px fullscreen=true download=true print=true]`
+```
+[pdfjs-viewer attachment_id=123 viewer_width=600px viewer_height=700px fullscreen=true download=true print=true]
+```
 
--   `attachment_id` (required): ID of the media file in WordPress
--   `viewer_width` (optional): width of the viewer (default: 100%)
--   `viewer_height` (optional): height of the viewer (default: 800px)
--   `fullscreen` (optional): true/false, displays fullscreen link above viewer (default: true)
--   `fullscreen_text` (optional): text, change the fullscreen link text (default: View Fullscreen)
+Or use a direct URL:
+
+```
+[pdfjs-viewer url=http://www.website.com/test.pdf viewer_width=600px viewer_height=700px fullscreen=true download=true print=true]
+```
+
+**Shortcode Parameters:**
+
+-   `attachment_id` (recommended): ID of the media file in WordPress media library
+-   `url` (alternative): Direct URL to PDF file. Use `attachment_id` when possible for better security.
+-   `viewer_width` (optional): Width of the viewer (default: `100%`)
+-   `viewer_height` (optional): Height of the viewer (default: `800px`)
+-   `fullscreen` (optional): `true`/`false`, displays fullscreen link above viewer (default: `true`)
+-   `fullscreen_text` (optional): Text for the fullscreen link (default: `View Fullscreen`)
     -   Spaces not allowed. Use `%20` in place of spaces.
--   `fullscreen_target` (optional): true/false, open the fullscreen link in a new tab
--   `download` (optional): true/false, enables or disables download button (default: true)
--   `print` (optional): true/false, enables or disables print button (default: true)
+-   `fullscreen_target` (optional): `true`/`false`, open the fullscreen link in a new tab (default: `false`)
+-   `download` (optional): `true`/`false`, enables or disables download button (default: `true`)
+-   `print` (optional): `true`/`false`, enables or disables print button (default: `true`)
+-   `openfile` (optional): `true`/`false`, show open file button (default: `false`)
+-   `zoom` (optional): Initial zoom level - `auto`, `page-actual`, `page-fit`, `page-width`, or percentage like `75`, `100`, `150` (default: `auto`)
 
-Want to help develop the plugin? Found a bug? [Find us on GitHub](https://github.com/TwisterMc/PDF.js-Viewer-Shortcode).
+Want to help develop the plugin? Found a bug? [Find us on GitHub](https://github.com/TwisterMc/PDF.js-Viewer-Shortcode). For build instructions and contribution guidelines see the developer guide in `DEVELOPER.md`.
 
 ## Invalid Block? Update it.
 
@@ -56,8 +70,27 @@ This plugin can be installed either directly from your WordPress admin panel by 
 
 ### 2.2.4
 
+-   Translation Support: Added internationalization support
+    -   Included Spanish (es_ES) and French (fr_FR) translations
+    -   Added translation template (POT file) for additional languages
+    -   Added `load_plugin_textdomain()` for automatic translation loading
+    -   Created translation guide in `languages/README.md`
+-   Code Quality\* Fixed `window.pdfjs_options` undefined errors in block editor
+    -   Added safe fallback to prevent JavaScript errors when options not loaded
+    -   Improved attribute default handling in Gutenberg block
+-   Added PDF preview in Gutenberg block editor
+-   Added Viewer Scale option to settings page
+-   Consolidated rendering logic with new `pdfjs_render_viewer()` function
+-   Created `pdfjs_get_options()` helper for consistent option retrieval
+-   Added proper input sanitization with `pdfjs_sanitize_option()`
+-   Fixed `pdfjs_viewer_scale` default from `0` to `auto`
+-   Updated build toolchain (Sass, webpack, Node 18+ requirement)
+-   Removed unused code and improved code organization
+-   Added `.nvmrc` for Node version management
+-   Enhanced `.gitignore` for build outputs
+-   Improved developer documentation in README
 -   Fixed PHP Warning: Undefined array key "editButtons" thanks to retroflexer
--   PDF in Gutenberg block
+-   PDF preview in Gutenberg block
 
 ### 2.2.3
 
