@@ -2,7 +2,7 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: PDFjs Viewer - Embed PDFs 2.2.3\n"
+"Project-Id-Version: PDFjs Viewer - Embed PDFs 2.2.5\n"
 "Report-Msgid-Bugs-To: https://github.com/TwisterMc/PDF.js-Viewer-Shortcode/issues\n"
 "POT-Creation-Date: 2025-11-13 00:00:00+00:00\n"
 "MIME-Version: 1.0\n"
@@ -55,6 +55,7 @@ msgid "Open Fullscreen in new tab?"
 msgstr ""
 
 #: blocks/src/block/block.js:240
+#: inc/options-page.php:113
 msgid "Embed Height"
 msgstr ""
 
@@ -63,6 +64,7 @@ msgid "Viewer Height (pixels)"
 msgstr ""
 
 #: blocks/src/block/block.js:254
+#: inc/options-page.php:117
 msgid "Embed Width"
 msgstr ""
 
@@ -82,74 +84,82 @@ msgstr ""
 msgid "Choose a PDF file"
 msgstr ""
 
-#: inc/options-page.php:15
-msgid "PDF.js Viewer Settings"
+#: inc/custom-page.php:9
+msgid "Security Check Failed"
 msgstr ""
 
-#: inc/options-page.php:16
-msgid "PDF.js Viewer"
+#: inc/media-button.php:14
+msgid "Add PDF"
 msgstr ""
 
-#: inc/options-page.php:31
-msgid "PDF.js Viewer Basic Settings"
+#: inc/options-page.php:55
+msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: inc/options-page.php:52
-msgid "Download Button"
+#: inc/options-page.php:59
+msgid "PDFjs Viewer Options"
 msgstr ""
 
-#: inc/options-page.php:62
-msgid "Print Button"
+#: inc/options-page.php:79
+msgid "Defaults"
 msgstr ""
 
-#: inc/options-page.php:72
-msgid "Fullscreen Link"
+#: inc/options-page.php:81
+msgid "Most defaults only affect new posts and existing posts when you edit them. Not all options work with the shortcode."
 msgstr ""
 
-#: inc/options-page.php:82
+#: inc/options-page.php:85
+msgid "Show Save Button"
+msgstr ""
+
+#: inc/options-page.php:89
+msgid "Show Print Button"
+msgstr ""
+
+#: inc/options-page.php:93
+msgid "Show Search Button"
+msgstr ""
+
+#: inc/options-page.php:97
+msgid "Show Editing Buttons"
+msgstr ""
+
+#: inc/options-page.php:101
+msgid "Show Fullscreen Link"
+msgstr ""
+
+#: inc/options-page.php:105
 msgid "Fullscreen Link Text"
 msgstr ""
 
-#: inc/options-page.php:92
-msgid "Open Fullscreen Link in New Window"
+#: inc/options-page.php:109
+msgid "Fullscreen Links in New Tabs"
 msgstr ""
 
-#: inc/options-page.php:102
-msgid "Embed Height"
+#: inc/options-page.php:120
+msgid "Note: 0 = 100%"
 msgstr ""
 
-#: inc/options-page.php:103
-msgid "In pixels, only enter numbers. For example, 800"
+#: inc/options-page.php:124
+msgid "Viewer Scale"
 msgstr ""
 
-#: inc/options-page.php:112
-msgid "Embed Width"
+#: inc/options-page.php:142
+msgid "Page Mode (aka Sidebar)"
 msgstr ""
 
-#: inc/options-page.php:113
-msgid "In pixels, only enter numbers. 0 will make the width 100%. For example, 500"
+#: inc/options-page.php:153
+msgid "Alternative PDF Loading"
 msgstr ""
 
-#: inc/options-page.php:122
-msgid "Viewer Scale / Zoom"
+#: inc/options-page.php:159
+msgid "When editing existing content, it may cause existing blocks to have \"unexpected or invalid content\" upon editing. Don't worry, just click the three little dots, choose \"Attempt Block Recovery\", and everything should be working again. This \"unexpected or invalid content\" will not affect live content, just content in the editor."
 msgstr ""
 
-#: inc/options-page.php:123
-msgid "Set default zoom level for PDF viewer"
+#: inc/options-page.php:162
+msgid "These options are not customizable per page/post at this time. Only globally."
 msgstr ""
 
-#: inc/options-page.php:130
-msgid "Automatic Zoom"
-msgstr ""
-
-#: inc/options-page.php:131
-msgid "Actual Size"
-msgstr ""
-
-#: inc/options-page.php:132
-msgid "Page Fit"
-msgstr ""
-
-#: inc/options-page.php:133
-msgid "Page Width"
+#: inc/options-page.php:183
+msgid "Settings"
 msgstr ""

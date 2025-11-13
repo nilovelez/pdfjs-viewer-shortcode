@@ -3,7 +3,7 @@
 # This file is distributed under the GPLv2.
 msgid ""
 msgstr ""
-"Project-Id-Version: PDFjs Viewer - Embed PDFs 2.2.3\n"
+"Project-Id-Version: PDFjs Viewer - Embed PDFs 2.2.5\n"
 "Report-Msgid-Bugs-To: https://github.com/TwisterMc/PDF.js-Viewer-Shortcode/issues\n"
 "POT-Creation-Date: 2025-11-13 00:00:00+00:00\n"
 "PO-Revision-Date: 2025-11-13 00:00:00+00:00\n"
@@ -58,7 +58,7 @@ msgid "Open Fullscreen in new tab?"
 msgstr "¿Abrir pantalla completa en nueva pestaña?"
 
 #: blocks/src/block/block.js:240
-#: inc/options-page.php:102
+#: inc/options-page.php:113
 msgid "Embed Height"
 msgstr "Altura de incrustación"
 
@@ -67,7 +67,7 @@ msgid "Viewer Height (pixels)"
 msgstr "Altura del visor (píxeles)"
 
 #: blocks/src/block/block.js:254
-#: inc/options-page.php:112
+#: inc/options-page.php:117
 msgid "Embed Width"
 msgstr "Ancho de incrustación"
 
@@ -87,66 +87,82 @@ msgstr "Eliminar PDF"
 msgid "Choose a PDF file"
 msgstr "Elegir un archivo PDF"
 
-#: inc/options-page.php:15
-msgid "PDF.js Viewer Settings"
-msgstr "Configuración del visor PDF.js"
+#: inc/custom-page.php:9
+msgid "Security Check Failed"
+msgstr "Verificación de seguridad fallida"
 
-#: inc/options-page.php:16
-msgid "PDF.js Viewer"
-msgstr "Visor PDF.js"
+#: inc/media-button.php:14
+msgid "Add PDF"
+msgstr "Agregar PDF"
 
-#: inc/options-page.php:31
-msgid "PDF.js Viewer Basic Settings"
-msgstr "Configuración básica del visor PDF.js"
+#: inc/options-page.php:55
+msgid "You do not have sufficient permissions to access this page."
+msgstr "No tienes permisos suficientes para acceder a esta página."
 
-#: inc/options-page.php:52
-msgid "Download Button"
-msgstr "Botón de descarga"
+#: inc/options-page.php:59
+msgid "PDFjs Viewer Options"
+msgstr "Opciones del visor PDFjs"
 
-#: inc/options-page.php:62
-msgid "Print Button"
-msgstr "Botón de imprimir"
+#: inc/options-page.php:79
+msgid "Defaults"
+msgstr "Valores predeterminados"
 
-#: inc/options-page.php:72
-msgid "Fullscreen Link"
-msgstr "Enlace de pantalla completa"
+#: inc/options-page.php:81
+msgid "Most defaults only affect new posts and existing posts when you edit them. Not all options work with the shortcode."
+msgstr "La mayoría de los valores predeterminados solo afectan las publicaciones nuevas y existentes cuando las editas. No todas las opciones funcionan con el shortcode."
 
-#: inc/options-page.php:82
+#: inc/options-page.php:85
+msgid "Show Save Button"
+msgstr "Mostrar botón de guardar"
+
+#: inc/options-page.php:89
+msgid "Show Print Button"
+msgstr "Mostrar botón de imprimir"
+
+#: inc/options-page.php:93
+msgid "Show Search Button"
+msgstr "Mostrar botón de búsqueda"
+
+#: inc/options-page.php:97
+msgid "Show Editing Buttons"
+msgstr "Mostrar botones de edición"
+
+#: inc/options-page.php:101
+msgid "Show Fullscreen Link"
+msgstr "Mostrar enlace de pantalla completa"
+
+#: inc/options-page.php:105
 msgid "Fullscreen Link Text"
 msgstr "Texto del enlace de pantalla completa"
 
-#: inc/options-page.php:92
-msgid "Open Fullscreen Link in New Window"
-msgstr "Abrir enlace de pantalla completa en nueva ventana"
+#: inc/options-page.php:109
+msgid "Fullscreen Links in New Tabs"
+msgstr "Enlaces de pantalla completa en nuevas pestañas"
 
-#: inc/options-page.php:103
-msgid "In pixels, only enter numbers. For example, 800"
-msgstr "En píxeles, solo ingrese números. Por ejemplo, 800"
+#: inc/options-page.php:120
+msgid "Note: 0 = 100%"
+msgstr "Nota: 0 = 100%"
 
-#: inc/options-page.php:113
-msgid "In pixels, only enter numbers. 0 will make the width 100%. For example, 500"
-msgstr "En píxeles, solo ingrese números. 0 hará que el ancho sea 100%. Por ejemplo, 500"
+#: inc/options-page.php:124
+msgid "Viewer Scale"
+msgstr "Escala del visor"
 
-#: inc/options-page.php:122
-msgid "Viewer Scale / Zoom"
-msgstr "Escala / Zoom del visor"
+#: inc/options-page.php:142
+msgid "Page Mode (aka Sidebar)"
+msgstr "Modo de página (barra lateral)"
 
-#: inc/options-page.php:123
-msgid "Set default zoom level for PDF viewer"
-msgstr "Establecer nivel de zoom predeterminado para el visor PDF"
+#: inc/options-page.php:153
+msgid "Alternative PDF Loading"
+msgstr "Carga alternativa de PDF"
 
-#: inc/options-page.php:130
-msgid "Automatic Zoom"
-msgstr "Zoom automático"
+#: inc/options-page.php:159
+msgid "When editing existing content, it may cause existing blocks to have \"unexpected or invalid content\" upon editing. Don't worry, just click the three little dots, choose \"Attempt Block Recovery\", and everything should be working again. This \"unexpected or invalid content\" will not affect live content, just content in the editor."
+msgstr "Al editar contenido existente, puede causar que los bloques existentes tengan \"contenido inesperado o no válido\" al editar. No te preocupes, solo haz clic en los tres puntos pequeños, elige \"Intentar recuperación de bloque\" y todo debería funcionar de nuevo. Este \"contenido inesperado o no válido\" no afectará el contenido publicado, solo el contenido en el editor."
 
-#: inc/options-page.php:131
-msgid "Actual Size"
-msgstr "Tamaño real"
+#: inc/options-page.php:162
+msgid "These options are not customizable per page/post at this time. Only globally."
+msgstr "Estas opciones no son personalizables por página/publicación en este momento. Solo globalmente."
 
-#: inc/options-page.php:132
-msgid "Page Fit"
-msgstr "Ajustar a página"
-
-#: inc/options-page.php:133
-msgid "Page Width"
-msgstr "Ancho de página"
+#: inc/options-page.php:183
+msgid "Settings"
+msgstr "Configuración"

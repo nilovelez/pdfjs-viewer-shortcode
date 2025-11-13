@@ -11,7 +11,10 @@ add_action( 'media_buttons', 'pdfjs_media_button', 12 );
  * Include the media button
  */
 function pdfjs_media_button() {
-	echo '<a href="#" class="button js-insert-pdfjs">' . __( 'Add PDF', 'pdfjs-viewer' ) . '</a>';
+	if ( ! current_user_can( 'upload_files' ) ) {
+		return;
+	}
+	echo '<a href="#" class="button js-insert-pdfjs">' . esc_html__( 'Add PDF', 'pdfjs-viewer-shortcode' ) . '</a>';
 }
 
 add_action( 'wp_enqueue_media', 'include_pdfjs_media_button_js_file' );

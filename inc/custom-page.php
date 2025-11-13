@@ -6,7 +6,7 @@ add_filter( 'init', function() {
 
 		$nonce = sanitize_text_field( $_REQUEST['_wpnonce'] );
 		if ( ! wp_verify_nonce( $nonce, 'pdfjs_full_screen' ) ) {
-			die( sanitize_text_field( __( 'Security Check Failed', 'pdfjs-viewer' ) ) );
+			die( esc_html__( 'Security Check Failed', 'pdfjs-viewer-shortcode' ) );
 		}
 
 		/**
