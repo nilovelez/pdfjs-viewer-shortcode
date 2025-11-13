@@ -148,13 +148,22 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 
 		// Compute preview iframe src and width for editor preview
 		const viewerBase = pdfjsOpts.pdfjs_viewer_url || null;
-		const iframeSrc = props.attributes.imageURL
-			? viewerBase
-				? `${ viewerBase }?file=${ encodeURIComponent(
-						props.attributes.imageURL
-				  ) }&attachment_id=${ props.attributes.imgID }`
-				: props.attributes.imageURL
-			: '';
+
+		// Build viewer URL with current block settings for live preview
+		let iframeSrc = '';
+		if ( props.attributes.imageURL && viewerBase ) {
+			const params = new URLSearchParams( {
+				file: props.attributes.imageURL,
+				attachment_id: props.attributes.imgID || '',
+				dButton: props.attributes.showDownload ? 'true' : 'false',
+				pButton: props.attributes.showPrint ? 'true' : 'false',
+				zoom: props.attributes.viewerScale || 'auto',
+			} );
+			iframeSrc = `${ viewerBase }?${ params.toString() }`;
+		} else if ( props.attributes.imageURL ) {
+			iframeSrc = props.attributes.imageURL;
+		}
+
 		const viewerWidthAttr =
 			props.attributes.viewerWidth === undefined ||
 			props.attributes.viewerWidth === 0
