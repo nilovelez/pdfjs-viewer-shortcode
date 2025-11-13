@@ -51,7 +51,7 @@ function pdfjs_register_gutenberg_card_block() {
 		$script_handle,
 		plugins_url( '../blocks/build/index.js', __FILE__ ),
 		isset( $asset_data['dependencies'] ) ? $asset_data['dependencies'] : array(),
-		isset( $asset_data['version'] ) ? $asset_data['version'] : ( file_exists( $script_file ) ? filemtime( $script_file ) : false ),
+		isset( $asset_data['version'] ) ? $asset_data['version'] : ( file_exists( $script_file ) ? filemtime( $script_file ) : PDFJS_PLUGIN_VERSION ),
 		true
 	);
 
@@ -63,7 +63,7 @@ function pdfjs_register_gutenberg_card_block() {
 			$style_handle,
 			plugins_url( '../blocks/build/style-index.css', __FILE__ ),
 			array(),
-			filemtime( $style_file )
+			file_exists( $style_file ) ? filemtime( $style_file ) : PDFJS_PLUGIN_VERSION
 		);
 	}
 
@@ -73,7 +73,7 @@ function pdfjs_register_gutenberg_card_block() {
 			$editor_style_handle,
 			plugins_url( '../blocks/build/index.css', __FILE__ ),
 			array(),
-			filemtime( $editor_style_file )
+			file_exists( $editor_style_file ) ? filemtime( $editor_style_file ) : PDFJS_PLUGIN_VERSION
 		);
 	}
 

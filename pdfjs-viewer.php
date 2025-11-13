@@ -3,13 +3,22 @@
 Plugin Name: PDFjs Viewer - Embed PDFs
 Plugin URI: http://byterevel.com/
 Description: Embed PDFs with the gorgeous PDF.js viewer
-Version: 2.2.3
+Version: 2.2.5
 Author: <a href="http://byterevel.com/">Ben Lawson</a>, <a href="https://www.twistermc.com/">Thomas McMahon</a>
 Contributors: FalconerWeb, twistermc
 License: GPLv2
  **/
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
+
+// Plugin version constant for cache busting - read from plugin header
+if ( ! defined( 'PDFJS_PLUGIN_VERSION' ) ) {
+	if ( ! function_exists( 'get_plugin_data' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	}
+	$plugin_data = get_plugin_data( __FILE__, false, false );
+	define( 'PDFJS_PLUGIN_VERSION', $plugin_data['Version'] );
+}
 
 /**
  * Load plugin text domain for translations.

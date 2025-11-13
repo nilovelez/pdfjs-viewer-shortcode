@@ -4,7 +4,7 @@
 -   Tags: pdf, pdfjs, viewer, embed, mozilla
 -   Requires at least: 4.9
 -   Tested up to: 6.8.2
--   Stable tag: 2.2.3
+-   Stable tag: 2.2.5
 -   License: GPLv2 or later
 -   License URI: http://www.gnu.org/licenses/gpl-2.0.html
 -   Requires PHP: 7.2
@@ -18,6 +18,7 @@ Incorporate [Mozilla's PDF.js](https://github.com/mozilla/pdf.js/) viewer into y
 Features:
 
 -   Gutenberg Block and Shortcode
+-   Translation Support (plugin only): Spanish and French included, ready for more languages
 -   Elegant Theme that adapts to dark and light mode (if browser supports dynamic CSS)
 -   Customizable buttons
 -   Page navigation drawer
@@ -69,6 +70,14 @@ This plugin can be installed either directly from your WordPress admin panel by 
 
 ### 2.2.5
 
+-   Translation Support: Added internationalization support
+    -   Included Spanish (es_ES) and French (fr_FR) translations
+    -   Added translation template (POT file) for additional languages
+    -   Added `load_plugin_textdomain()` for automatic translation loading
+    -   Created translation guide in `languages/README.md`
+-   Code Quality\* Fixed `window.pdfjs_options` undefined errors in block editor
+    -   Added safe fallback to prevent JavaScript errors when options not loaded
+    -   Improved attribute default handling in Gutenberg block
 -   Added PDF preview in Gutenberg block editor
 -   Added Viewer Scale option to settings page
 -   Consolidated rendering logic with new `pdfjs_render_viewer()` function
