@@ -12,14 +12,19 @@ License: GPLv2
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
 
 /**
- * Shortcode
- */
-require 'inc/shortcode.php';
-
-/**
  * Generate the PDF embed code.
  */
 require 'inc/embed.php';
+
+/**
+ * Shared PDF viewer rendering
+ */
+require 'inc/render-viewer.php';
+
+/**
+ * Shortcode
+ */
+require 'inc/shortcode.php';
 
 /**
  * Media Button for Classic Editor

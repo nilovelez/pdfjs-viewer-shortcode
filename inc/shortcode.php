@@ -34,6 +34,6 @@ function pdfjs_handler( $incoming_from_post ) {
 		$incoming_from_post
 	);
 
-	// send back text to replace shortcode in post.
-	return pdfjs_generator( $incoming_from_post );
+	// Use shared rendering function.
+	return pdfjs_render_viewer( $incoming_from_post );
 }
