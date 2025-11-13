@@ -97,15 +97,24 @@ function pdfjs_render_viewer( $args ) {
 	// Build fullscreen link.
 	$fullscreen_link = '';
 	if ( 'true' === $fullscreen ) {
+		$fullscreen_aria = esc_attr__( 'Open PDF in fullscreen mode', 'pdfjs-viewer-shortcode' );
 		if ( $pdfjs_custom_page ) {
-			$fullscreen_link = '<div class="pdfjs-fullscreen"><a href="?pdfjs_id=' . $attachment_id . '&_wpnonce=' . $nonce . '" ' . $fullscreen_target_attr . '>' . esc_html( $fullscreen_text ) . '</a></div>';
+			$fullscreen_link = '<div class="pdfjs-fullscreen"><a href="?pdfjs_id=' . $attachment_id . '&_wpnonce=' . $nonce . '" ' . $fullscreen_target_attr . ' aria-label="' . $fullscreen_aria . '">' . esc_html( $fullscreen_text ) . '</a></div>';
 		} else {
-			$fullscreen_link = '<div class="pdfjs-fullscreen"><a href="' . esc_url( $final_url ) . '" ' . $fullscreen_target_attr . '>' . esc_html( $fullscreen_text ) . '</a></div>';
+			$fullscreen_link = '<div class="pdfjs-fullscreen"><a href="' . esc_url( $final_url ) . '" ' . $fullscreen_target_attr . ' aria-label="' . $fullscreen_aria . '">' . esc_html( $fullscreen_text ) . '</a></div>';
 		}
 	}
 
-	// Build iframe.
-	$iframe_code = '<div><iframe width="' . esc_attr( $viewer_width ) . '" height="' . esc_attr( $viewer_height ) . '" src="' . esc_url( $final_url ) . '" title="Embedded PDF" class="pdfjs-iframe"></iframe></div>';
+	// Get file name for accessible title
+	$file_name = basename( parse_url( $file_url, PHP_URL_PATH ) );
+	$iframe_title = sprintf(
+		/* translators: %s: PDF file name */
+		esc_attr__( 'PDF document: %s', 'pdfjs-viewer-shortcode' ),
+		$file_name
+	);
+
+	// Build iframe with accessibility attributes.
+	$iframe_code = '<div role="region" aria-label="' . esc_attr__( 'PDF Viewer', 'pdfjs-viewer-shortcode' ) . '"><iframe width="' . esc_attr( $viewer_width ) . '" height="' . esc_attr( $viewer_height ) . '" src="' . esc_url( $final_url ) . '" title="' . $iframe_title . '" aria-label="' . $iframe_title . '" class="pdfjs-iframe" tabindex="0"></iframe></div>';
 
 	return $fullscreen_link . $iframe_code;
 }

@@ -107,7 +107,7 @@ function pdfjs_options_page() {
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_fullscreen_link_target"><?php esc_html_e( 'Fullscreen Links in New Tabs', 'pdfjs-viewer-shortcode' ); ?></label></th>
-					<td><input type="checkbox" id="pdfjs_fullscreen_link_target" name="pdfjs_fullscreen_link_target" <?php echo $link_target ? 'checked' : ''; ?> /></td>
+					<td><input type="checkbox" id="pdfjs_fullscreen_link_target" name="pdfjs_fullscreen_link_target" <?php checked( $link_target, 'on' ); ?> /></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_embed_height"><?php esc_html_e( 'Embed Height', 'pdfjs-viewer-shortcode' ); ?></label></th>
@@ -128,12 +128,12 @@ function pdfjs_options_page() {
 							<option value="page-actual" <?php selected( $viewer_scale, 'page-actual' ); ?>>Actual Size</option>
 							<option value="page-fit" <?php selected( $viewer_scale, 'page-fit' ); ?>>Page Fit</option>
 							<option value="page-width" <?php selected( $viewer_scale, 'page-width' ); ?>>Page Width</option>
-							<option value="50" <?php echo $viewer_scale === '50' ? 'selected' : ''; ?>>50%</option>
-							<option value="75" <?php echo $viewer_scale === '75' ? 'selected' : ''; ?>>75%</option>
-							<option value="100" <?php echo $viewer_scale === '100' ? 'selected' : ''; ?>>100%</option>
-							<option value="125" <?php echo $viewer_scale === '125' ? 'selected' : ''; ?>>125%</option>
-							<option value="150" <?php echo $viewer_scale === '150' ? 'selected' : ''; ?>>150%</option>
-							<option value="200" <?php echo $viewer_scale === '200' ? 'selected' : ''; ?>>200%</option>
+							<option value="50" <?php selected( $viewer_scale, '50' ); ?>>50%</option>
+							<option value="75" <?php selected( $viewer_scale, '75' ); ?>>75%</option>
+							<option value="100" <?php selected( $viewer_scale, '100' ); ?>>100%</option>
+							<option value="125" <?php selected( $viewer_scale, '125' ); ?>>125%</option>
+							<option value="150" <?php selected( $viewer_scale, '150' ); ?>>150%</option>
+							<option value="200" <?php selected( $viewer_scale, '200' ); ?>>200%</option>
 						</select>
 					</td>
 				</tr>
@@ -142,16 +142,16 @@ function pdfjs_options_page() {
 					<th scope="row"><label for="pdfjs_viewer_pagemode"><?php esc_html_e( 'Page Mode (aka Sidebar)', 'pdfjs-viewer-shortcode' ); ?> <sup>1</sup></label></th>
 					<td>
 						<select id="pdfjs_viewer_pagemode" name="pdfjs_viewer_pagemode">
-							<option value="none" <?php echo $viewer_pagemode === 'none' ? 'selected' : ''; ?>>None</option>
-							<option value="thumbs" <?php echo $viewer_pagemode === 'thumbs' ? 'selected' : ''; ?>>Thumbs</option>
-							<option value="bookmarks" <?php echo $viewer_pagemode === 'bookmarks' ? 'selected' : ''; ?>>Bookmarks</option>
-							<option value="attachments" <?php echo $viewer_pagemode === 'attachments' ? 'selected' : ''; ?>>Attachments</option>
+							<option value="none" <?php selected( $viewer_pagemode, 'none' ); ?>>None</option>
+							<option value="thumbs" <?php selected( $viewer_pagemode, 'thumbs' ); ?>>Thumbs</option>
+							<option value="bookmarks" <?php selected( $viewer_pagemode, 'bookmarks' ); ?>>Bookmarks</option>
+							<option value="attachments" <?php selected( $viewer_pagemode, 'attachments' ); ?>>Attachments</option>
 						</select>
 					</td>
 				</tr>
 				<tr style="display:none;">
 					<th scope="row"><label for="pdfjs_custom_page"><?php esc_html_e( 'Alternative PDF Loading', 'pdfjs-viewer-shortcode' ); ?></label></th>
-					<td><input type="checkbox" id="pdfjs_custom_page" name="pdfjs_custom_page" <?php echo $pdfjs_custom_page ? 'checked' : ''; ?> /> <span style="color:rebeccapurple;"> - Beta. Test with caution and <a href="https://wordpress.org/support/plugin/pdfjs-viewer-shortcode/" target="_blank">leave feedback</a> on how it works.</span></td>
+					<td><input type="checkbox" id="pdfjs_custom_page" name="pdfjs_custom_page" <?php checked( $pdfjs_custom_page, 'on' ); ?> /> <span style="color:rebeccapurple;"> - Beta. Test with caution and <a href="https://wordpress.org/support/plugin/pdfjs-viewer-shortcode/" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'leave feedback', 'pdfjs-viewer-shortcode' ); ?></a> <?php esc_html_e( 'on how it works.', 'pdfjs-viewer-shortcode' ); ?></span></td>
 				</tr>
 			</table>
 			<?php submit_button(); ?>

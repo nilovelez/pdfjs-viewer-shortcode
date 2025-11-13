@@ -293,6 +293,10 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 						<Button
 							className="pdfjs-button"
 							onClick={ onRemoveImg }
+							aria-label={ __(
+								'Remove the current PDF file',
+								'pdfjs-viewer-shortcode'
+							) }
 						>
 							{ __( 'Remove PDF', 'pdfjs-viewer-shortcode' ) }
 						</Button>
@@ -305,6 +309,10 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 								<Button
 									className="pdfjs-button"
 									onClick={ open }
+									aria-label={ __(
+										'Open media library to choose a PDF file',
+										'pdfjs-viewer-shortcode'
+									) }
 								>
 									{ __(
 										'Choose a PDF file',
@@ -325,6 +333,11 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 							height={
 								props.attributes.viewerHeight || defaultHeight
 							}
+							role="region"
+							aria-label={ __(
+								'PDF Preview',
+								'pdfjs-viewer-shortcode'
+							) }
 						>
 							<iframe
 								src={ iframeSrc }
@@ -334,7 +347,25 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 									defaultHeight
 								}
 								className="pdfjs-iframe-editor"
-								title="PDF preview"
+								title={
+									props.attributes.imgTitle ||
+									__(
+										'PDF Preview',
+										'pdfjs-viewer-shortcode'
+									)
+								}
+								aria-label={
+									props.attributes.imgTitle
+										? `${ __(
+												'PDF document preview',
+												'pdfjs-viewer-shortcode'
+										  ) }: ${ props.attributes.imgTitle }`
+										: __(
+												'PDF document preview',
+												'pdfjs-viewer-shortcode'
+										  )
+								}
+								tabIndex="0"
 								style={ {
 									border: '1px solid #ddd',
 									maxWidth: '100%',

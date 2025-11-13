@@ -5,10 +5,10 @@
 ?>
 <!DOCTYPE html>
 
-<html class="no-js" <?php language_attributes(); ?> dir="ltr" mozdisallowselectionprint>
+<html class="no-js" <?php language_attributes(); ?> mozdisallowselectionprint>
 
 	<head>
-		<title>PDFJS Viewer</title>
+		<title><?php esc_html_e( 'PDF Viewer', 'pdfjs-viewer-shortcode' ); ?></title>
 
 		<meta name="pdfjs" content="<?php echo esc_url( $pdfjs_url ); ?>">
 
@@ -41,7 +41,7 @@
 
 	</head>
 
-    <body tabindex="1">
+    <body tabindex="0">
     <div id="outerContainer">
 
         <div id="sidebarContainer">

@@ -14,7 +14,7 @@ function pdfjs_media_button() {
 	if ( ! current_user_can( 'upload_files' ) ) {
 		return;
 	}
-	echo '<a href="#" class="button js-insert-pdfjs">' . esc_html__( 'Add PDF', 'pdfjs-viewer-shortcode' ) . '</a>';
+	echo '<a href="#" class="button js-insert-pdfjs" aria-label="' . esc_attr__( 'Add PDF to content', 'pdfjs-viewer-shortcode' ) . '">' . esc_html__( 'Add PDF', 'pdfjs-viewer-shortcode' ) . '</a>';
 }
 
 add_action( 'wp_enqueue_media', 'include_pdfjs_media_button_js_file' );
