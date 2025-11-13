@@ -21,6 +21,9 @@ const defaultWidth = 0;
 
 const ALLOWED_MEDIA_TYPES = [ 'application/pdf' ];
 
+// Safe access to localized options with fallbacks
+const pdfjsOpts = window.pdfjs_options || {};
+
 registerBlockType( 'pdfjsblock/pdfjs-embed', {
 	title: __( 'Embed PDF.js Viewer', 'pdfjs-viewer-shortcode' ),
 	icon: 'media-document',
@@ -38,43 +41,39 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 		},
 		showDownload: {
 			type: 'boolean',
-			default: !! window.pdfjs_options.pdfjs_download_button,
+			default: !! pdfjsOpts.pdfjs_download_button,
 		},
 		showPrint: {
 			type: 'boolean',
-			default: !! window.pdfjs_options.pdfjs_print_button,
+			default: !! pdfjsOpts.pdfjs_print_button,
 		},
 		showFullscreen: {
 			type: 'boolean',
-			default: !! window.pdfjs_options.pdfjs_fullscreen_link,
+			default: !! pdfjsOpts.pdfjs_fullscreen_link,
 		},
 		openFullscreen: {
 			type: 'boolean',
-			default: !! window.pdfjs_options.pdfjs_fullscreen_link_target,
+			default: !! pdfjsOpts.pdfjs_fullscreen_link_target,
 		},
 		fullscreenText: {
 			type: 'string',
-			default: window.pdfjs_options.pdfjs_fullscreen_link_text
-				? window.pdfjs_options.pdfjs_fullscreen_link_text
-				: 'View Fullscreen',
+			default: pdfjsOpts.pdfjs_fullscreen_link_text || 'View Fullscreen',
 		},
 		viewerHeight: {
 			type: 'number',
-			default: window.pdfjs_options.pdfjs_embed_height
-				? Number( window.pdfjs_options.pdfjs_embed_height )
+			default: pdfjsOpts.pdfjs_embed_height
+				? Number( pdfjsOpts.pdfjs_embed_height )
 				: 800,
 		},
 		viewerWidth: {
 			type: 'number',
-			default: window.pdfjs_options.pdfjs_embed_width
-				? Number( window.pdfjs_options.pdfjs_embed_width )
+			default: pdfjsOpts.pdfjs_embed_width
+				? Number( pdfjsOpts.pdfjs_embed_width )
 				: 0,
 		},
 		viewerScale: {
 			type: 'string',
-			default: window.pdfjs_options.pdfjs_viewer_scale
-				? window.pdfjs_options.pdfjs_viewer_scale
-				: 'auto',
+			default: pdfjsOpts.pdfjs_viewer_scale || 'auto',
 		},
 	},
 	keywords: [ __( 'PDF Selector', 'pdfjs-viewer-shortcode' ) ],
@@ -148,10 +147,7 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 		};
 
 		// Compute preview iframe src and width for editor preview
-		const viewerBase =
-			window.pdfjs_options && window.pdfjs_options.pdfjs_viewer_url
-				? window.pdfjs_options.pdfjs_viewer_url
-				: null;
+		const viewerBase = pdfjsOpts.pdfjs_viewer_url || null;
 		const iframeSrc = props.attributes.imageURL
 			? viewerBase
 				? `${ viewerBase }?file=${ encodeURIComponent(
