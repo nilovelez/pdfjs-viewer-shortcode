@@ -10,12 +10,29 @@ function pdfjs_register_gutenberg_card_block() {
 		return;
 	}
 
-	// Register our block script with WordPress.
+	$base_dir         = plugin_dir_path( __FILE__ ) . '../blocks/build/';
+	$script_handle    = 'gutenberg-pdfjs';
+	$style_handle           = null;
+	$editor_style_handle    = null;
+	$asset_file       = $base_dir . 'index.asset.php';
+	$script_file      = $base_dir . 'index.js';
+	$style_file       = $base_dir . 'style-index.css';
+	$editor_style_file = $base_dir . 'index.css';
+
+	$asset_data = array(
+		'dependencies' => array( 'wp-blocks', 'wp-element', 'wp-editor' ),
+		'version'      => file_exists( $script_file ) ? filemtime( $script_file ) : false,
+	);
+
+	if ( file_exists( $asset_file ) ) {
+		$asset_data = include $asset_file;
+	}
+
 	wp_register_script(
-		'gutenberg-pdfjs',
-		plugins_url( '../blocks/dist/blocks.build.js', __FILE__ ),
-		array( 'wp-blocks', 'wp-element', 'wp-editor' ),
-		'2.2.3',
+		$script_handle,
+		plugins_url( '../blocks/build/index.js', __FILE__ ),
+		isset( $asset_data['dependencies'] ) ? $asset_data['dependencies'] : array(),
+		isset( $asset_data['version'] ) ? $asset_data['version'] : ( file_exists( $script_file ) ? filemtime( $script_file ) : false ),
 		true
 	);
 
@@ -30,23 +47,43 @@ function pdfjs_register_gutenberg_card_block() {
 		'pdfjs_viewer_scale'           => get_option( 'pdfjs_viewer_scale', 0 ),
 		'pdfjs_viewer_url'             => plugin_dir_url( __DIR__ ) . 'pdfjs/web/viewer.php',
 	);
-	wp_localize_script( 'gutenberg-pdfjs', 'pdfjs_options', $pdfjs_array );
+	wp_localize_script( $script_handle, 'pdfjs_options', $pdfjs_array );
 
-	// Register our block's base CSS.
-	wp_register_style(
-		'gutenberg-pdfjs',
-		plugins_url( '../blocks/dist/style.css', __FILE__ ),
-		'',
-		'2.2.3'
+	if ( file_exists( $style_file ) ) {
+		$style_handle = 'gutenberg-pdfjs-style';
+		wp_register_style(
+			$style_handle,
+			plugins_url( '../blocks/build/style-index.css', __FILE__ ),
+			array(),
+			filemtime( $style_file )
+		);
+	}
+
+	if ( file_exists( $editor_style_file ) ) {
+		$editor_style_handle = 'gutenberg-pdfjs-editor-style';
+		wp_register_style(
+			$editor_style_handle,
+			plugins_url( '../blocks/build/index.css', __FILE__ ),
+			array(),
+			filemtime( $editor_style_file )
+		);
+	}
+
+	$block_args = array(
+		'editor_script' => $script_handle,
 	);
+
+	if ( $editor_style_handle ) {
+		$block_args['editor_style'] = $editor_style_handle;
+	}
+
+	if ( $style_handle ) {
+		$block_args['style'] = $style_handle;
+	}
 
 	register_block_type(
 		'blocks/pdfjs-block',
-		array(
-			'editor_script' => 'gutenberg-pdfjs',
-			'editor_style'  => 'gutenberg-pdfjs-edit-style',
-			'style'         => 'gutenberg-pdfjs',
-		)
+		$block_args
 	);
 }
 
