@@ -54,6 +54,9 @@ This plugin can be installed either directly from your WordPress admin panel by 
 
 ## Changelog
 
+### 2.2.4
+- Fixed PHP Warning: Undefined array key "editButtons" thanks to retroflexer
+
 ### 2.2.3
 - Updated PDFjs to PDF.js 5.3.93
 - Merged 'Add toggle to disable editing buttons' PR
