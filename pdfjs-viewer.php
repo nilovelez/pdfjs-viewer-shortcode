@@ -12,6 +12,14 @@ License: GPLv2
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
 
 /**
+ * Load plugin text domain for translations.
+ */
+function pdfjs_load_textdomain() {
+	load_plugin_textdomain( 'pdfjs-viewer-shortcode', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
+}
+add_action( 'plugins_loaded', 'pdfjs_load_textdomain' );
+
+/**
  * Generate the PDF embed code.
  */
 require 'inc/embed.php';

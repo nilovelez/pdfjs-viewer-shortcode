@@ -1,0 +1,155 @@
+# Copyright (C) 2025 PDFjs Viewer - Embed PDFs
+# This file is distributed under the GPLv2.
+msgid ""
+msgstr ""
+"Project-Id-Version: PDFjs Viewer - Embed PDFs 2.2.3\n"
+"Report-Msgid-Bugs-To: https://github.com/TwisterMc/PDF.js-Viewer-Shortcode/issues\n"
+"POT-Creation-Date: 2025-11-13 00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2025-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: blocks/src/block/block.js:23
+msgid "Embed PDF.js Viewer"
+msgstr ""
+
+#: blocks/src/block/block.js:80
+msgid "PDF Selector"
+msgstr ""
+
+#: blocks/src/block/block.js:173
+msgid "PDF.js Options"
+msgstr ""
+
+#: blocks/src/block/block.js:178
+msgid "Show Save Option"
+msgstr ""
+
+#: blocks/src/block/block.js:182
+#: blocks/src/block/block.js:196
+#: blocks/src/block/block.js:210
+#: blocks/src/block/block.js:224
+msgid "Yes"
+msgstr ""
+
+#: blocks/src/block/block.js:183
+#: blocks/src/block/block.js:197
+#: blocks/src/block/block.js:211
+#: blocks/src/block/block.js:225
+msgid "No"
+msgstr ""
+
+#: blocks/src/block/block.js:192
+msgid "Show Print Option"
+msgstr ""
+
+#: blocks/src/block/block.js:206
+msgid "Show Fullscreen Option"
+msgstr ""
+
+#: blocks/src/block/block.js:220
+msgid "Open Fullscreen in new tab?"
+msgstr ""
+
+#: blocks/src/block/block.js:240
+msgid "Embed Height"
+msgstr ""
+
+#: blocks/src/block/block.js:244
+msgid "Viewer Height (pixels)"
+msgstr ""
+
+#: blocks/src/block/block.js:254
+msgid "Embed Width"
+msgstr ""
+
+#: blocks/src/block/block.js:258
+msgid "Viewer Width (pixels)"
+msgstr ""
+
+#: blocks/src/block/block.js:274
+msgid "PDF.js Embed"
+msgstr ""
+
+#: blocks/src/block/block.js:285
+msgid "Remove PDF"
+msgstr ""
+
+#: blocks/src/block/block.js:297
+msgid "Choose a PDF file"
+msgstr ""
+
+#: inc/options-page.php:15
+msgid "PDF.js Viewer Settings"
+msgstr ""
+
+#: inc/options-page.php:16
+msgid "PDF.js Viewer"
+msgstr ""
+
+#: inc/options-page.php:31
+msgid "PDF.js Viewer Basic Settings"
+msgstr ""
+
+#: inc/options-page.php:52
+msgid "Download Button"
+msgstr ""
+
+#: inc/options-page.php:62
+msgid "Print Button"
+msgstr ""
+
+#: inc/options-page.php:72
+msgid "Fullscreen Link"
+msgstr ""
+
+#: inc/options-page.php:82
+msgid "Fullscreen Link Text"
+msgstr ""
+
+#: inc/options-page.php:92
+msgid "Open Fullscreen Link in New Window"
+msgstr ""
+
+#: inc/options-page.php:102
+msgid "Embed Height"
+msgstr ""
+
+#: inc/options-page.php:103
+msgid "In pixels, only enter numbers. For example, 800"
+msgstr ""
+
+#: inc/options-page.php:112
+msgid "Embed Width"
+msgstr ""
+
+#: inc/options-page.php:113
+msgid "In pixels, only enter numbers. 0 will make the width 100%. For example, 500"
+msgstr ""
+
+#: inc/options-page.php:122
+msgid "Viewer Scale / Zoom"
+msgstr ""
+
+#: inc/options-page.php:123
+msgid "Set default zoom level for PDF viewer"
+msgstr ""
+
+#: inc/options-page.php:130
+msgid "Automatic Zoom"
+msgstr ""
+
+#: inc/options-page.php:131
+msgid "Actual Size"
+msgstr ""
+
+#: inc/options-page.php:132
+msgid "Page Fit"
+msgstr ""
+
+#: inc/options-page.php:133
+msgid "Page Width"
+msgstr ""

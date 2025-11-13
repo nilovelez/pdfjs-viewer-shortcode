@@ -12,7 +12,8 @@
 		"start": "wp-scripts start blocks/src/index.js --output-path=blocks/build",
 		"lint:js": "wp-scripts lint-js blocks/src",
 		"lint:css": "wp-scripts lint-style blocks/src",
-		"format": "wp-scripts format"
+		"format": "wp-scripts format",
+		"makepot": "wp i18n make-pot . languages/pdfjs-viewer-shortcode.pot --domain=pdfjs-viewer-shortcode --exclude=node_modules,vendor"
 	},
 	"repository": {
 		"type": "git",
@@ -26,6 +27,7 @@
 	"homepage": "https://github.com/TwisterMc/PDF.js-Viewer-Shortcode#readme",
 	"devDependencies": {
 		"@wordpress/eslint-plugin": "^5.1.0",
+		"@wordpress/i18n": "^6.8.0",
 		"@wordpress/prettier-config": "^0.2.0",
 		"@wordpress/scripts": "^31.0.0",
 		"sass": "^1.94.0",
