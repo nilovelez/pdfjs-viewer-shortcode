@@ -23,7 +23,9 @@
   "devDependencies": {
     "@wordpress/eslint-plugin": "^5.1.0",
     "@wordpress/prettier-config": "^0.2.0",
-    "@wordpress/scripts": "^27.1.0"
+    "@wordpress/scripts": "^31.0.0",
+    "sass": "^1.94.0",
+    "sass-loader": "^16.0.6"
   },
   "prettier": "@wordpress/prettier-config",
   "resolutions": {
