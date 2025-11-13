@@ -55,26 +55,32 @@ This plugin can be installed either directly from your WordPress admin panel by 
 ## Changelog
 
 ### 2.2.4
-- Fixed PHP Warning: Undefined array key "editButtons" thanks to retroflexer
+
+-   Fixed PHP Warning: Undefined array key "editButtons" thanks to retroflexer
+-   PDF in Gutenberg block
 
 ### 2.2.3
-- Updated PDFjs to PDF.js 5.3.93
-- Merged 'Add toggle to disable editing buttons' PR
-- Merged 'Fix PHP Warnings: Undefined array key' PR
-- Package security updates / rebuild
+
+-   Updated PDFjs to PDF.js 5.3.93
+-   Merged 'Add toggle to disable editing buttons' PR
+-   Merged 'Fix PHP Warnings: Undefined array key' PR
+-   Package security updates / rebuild
 
 ### 2.2.2
-- PDFjs with legacy browser support
+
+-   PDFjs with legacy browser support
 
 ### 2.2.1
-- .mjs workaround
-- Updated to PDFjs 4.5.136
+
+-   .mjs workaround
+-   Updated to PDFjs 4.5.136
 
 ### 2.2
-- Updated to PDFjs 4.3.136
-- Renamed 'Download' to 'Save' based on PDFjs change.
-- Removed the zoom feature to hopefully fix Edge issues.
-- Disabling the Alternative PDF Loading version
+
+-   Updated to PDFjs 4.3.136
+-   Renamed 'Download' to 'Save' based on PDFjs change.
+-   Removed the zoom feature to hopefully fix Edge issues.
+-   Disabling the Alternative PDF Loading version
 
 ### 2.1.8
 

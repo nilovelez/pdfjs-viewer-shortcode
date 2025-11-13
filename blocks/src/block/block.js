@@ -141,15 +141,35 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 		};
 
 		const onFullscreenTextChange = ( value ) => {
-			value = value.replace(/(<([^>]+)>)/gi, "")
+			value = value.replace( /(<([^>]+)>)/gi, '' );
 			props.setAttributes( {
 				fullscreenText: value,
 			} );
 		};
 
+		// Compute preview iframe src and width for editor preview
+		const viewerBase =
+			window.pdfjs_options && window.pdfjs_options.pdfjs_viewer_url
+				? window.pdfjs_options.pdfjs_viewer_url
+				: null;
+		const iframeSrc = props.attributes.imageURL
+			? viewerBase
+				? `${ viewerBase }?file=${ encodeURIComponent(
+						props.attributes.imageURL
+				  ) }&attachment_id=${ props.attributes.imgID }`
+				: props.attributes.imageURL
+			: '';
+		const viewerWidthAttr =
+			props.attributes.viewerWidth === undefined ||
+			props.attributes.viewerWidth === 0
+				? '100%'
+				: `${ props.attributes.viewerWidth }px`;
+
 		return [
 			<InspectorControls key="i1">
-				<PanelBody title={ __( 'PDF.js Options', 'pdfjs-viewer-shortcode' ) }>
+				<PanelBody
+					title={ __( 'PDF.js Options', 'pdfjs-viewer-shortcode' ) }
+				>
 					<PanelRow>
 						<ToggleControl
 							label={ __(
@@ -167,7 +187,10 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 					</PanelRow>
 					<PanelRow>
 						<ToggleControl
-							label={ __( 'Show Print Option', 'pdfjs-viewer-shortcode' ) }
+							label={ __(
+								'Show Print Option',
+								'pdfjs-viewer-shortcode'
+							) }
 							help={
 								props.attributes.showPrint
 									? __( 'Yes', 'pdfjs-viewer-shortcode' )
@@ -215,7 +238,9 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 						/>
 					</PanelRow>
 				</PanelBody>
-				<PanelBody title={ __( 'Embed Height', 'pdfjs-viewer-shortcode' ) }>
+				<PanelBody
+					title={ __( 'Embed Height', 'pdfjs-viewer-shortcode' ) }
+				>
 					<RangeControl
 						label={ __(
 							'Viewer Height (pixels)',
@@ -229,7 +254,9 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 						initialPosition={ defaultHeight }
 					/>
 				</PanelBody>
-				<PanelBody title={ __( 'Embed Width', 'pdfjs-viewer-shortcode' ) }>
+				<PanelBody
+					title={ __( 'Embed Width', 'pdfjs-viewer-shortcode' ) }
+				>
 					<RangeControl
 						label={ __(
 							'Viewer Width (pixels)',
@@ -245,48 +272,98 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 					/>
 				</PanelBody>
 			</InspectorControls>,
-			<div className="pdfjs-wrapper components-placeholder" key="i2" style={{height: props.attributes.viewerHeight}}>
+			<div
+				className="pdfjs-wrapper components-placeholder"
+				key="i2"
+				style={ { height: props.attributes.viewerHeight } }
+			>
 				<div>
-					<strong>{ __( 'PDF.js Embed', 'pdfjs-viewer-shortcode' ) }</strong>
-				</div>
-				{ props.attributes.imageURL ? (
-					<div className="pdfjs-upload-wrapper">
-						<div className="pdfjs-upload-button-wrapper">
-							<span className="dashicons dashicons-media-document"></span>
-							<span className="pdfjs-title">
-								{ props.attributes.imgTitle
-									? props.attributes.imgTitle
-									: props.attributes.imageURL }
-							</span>
-						</div>
-						{ props.isSelected ? (
-							<Button className="button" onClick={ onRemoveImg }>
-								{ __( 'Remove PDF', 'pdfjs-viewer-shortcode' ) }
-							</Button>
-						) : null }
-					</div>
-				) : (
-					<div>
+					<strong>
+						{ __( 'PDF.js Embed', 'pdfjs-viewer-shortcode' ) }
+					</strong>
+					&nbsp; - &nbsp;
+					<span className="pdfjs-title">
+						{ props.attributes.imgTitle
+							? props.attributes.imgTitle
+							: 'Choose a PDF file' }
+					</span>
+					&nbsp; - &nbsp;
+					{ props.attributes.imageURL ? (
+						<Button
+							className="pdfjs-button"
+							onClick={ onRemoveImg }
+						>
+							{ __( 'Remove PDF', 'pdfjs-viewer-shortcode' ) }
+						</Button>
+					) : (
 						<MediaUpload
 							onSelect={ onFileSelect }
 							allowedTypes={ ALLOWED_MEDIA_TYPES }
 							value={ props.attributes.imgID }
 							render={ ( { open } ) => (
-								<Button className="button" onClick={ open }>
-									{ __( 'Choose PDF', 'pdfjs-viewer-shortcode' ) }
+								<Button
+									className="pdfjs-button"
+									onClick={ open }
+								>
+									{ __(
+										'Choose a PDF file',
+										'pdfjs-viewer-shortcode'
+									) }
 								</Button>
 							) }
 						/>
+					) }
+				</div>
+				{ props.attributes.imageURL ? (
+					<div style={ { width: '100%' } }>
+						{ /* Editor preview iframe */ }
+						<div
+							className="pdfjs-preview"
+							width={ viewerWidthAttr ? viewerWidthAttr : '100%' }
+							style={ { maxWidth: '100%' } }
+							height={
+								props.attributes.viewerHeight || defaultHeight
+							}
+						>
+							<iframe
+								src={ iframeSrc }
+								width={ viewerWidthAttr }
+								height={
+									props.attributes.viewerHeight ||
+									defaultHeight
+								}
+								className="pdfjs-iframe-editor"
+								title="PDF preview"
+								style={ {
+									border: '1px solid #ddd',
+									maxWidth: '100%',
+								} }
+							/>
+						</div>
 					</div>
-				) }
+				) : null }
 			</div>,
 		];
 	},
 
-	save(props) {
+	save( props ) {
 		return (
 			<div className="pdfjs-wrapper">
-				{`[pdfjs-viewer attachment_id=${ props.attributes.imgID } url=${ props.attributes.imageURL } viewer_width=${ ( props.attributes.viewerWidth !== undefined ) ? props.attributes.viewerWidth : defaultWidth } viewer_height=${ ( props.attributes.viewerHeight !== undefined ) ? props.attributes.viewerHeight : defaultHeight } url=${ props.attributes.imageURL } download=${ props.attributes.showDownload.toString() } print=${ props.attributes.showPrint.toString() } fullscreen=${ props.attributes.showFullscreen.toString() } fullscreen_target=${ props.attributes.openFullscreen.toString() } fullscreen_text="${ props.attributes.fullscreenText }" zoom=${ props.attributes.viewerScale.toString()}  ]`}
+				{ `[pdfjs-viewer attachment_id=${
+					props.attributes.imgID
+				} url=${ props.attributes.imageURL } viewer_width=${
+					props.attributes.viewerWidth !== undefined
+						? props.attributes.viewerWidth
+						: defaultWidth
+				} viewer_height=${
+					props.attributes.viewerHeight !== undefined
+						? props.attributes.viewerHeight
+						: defaultHeight
+				} url=${
+					props.attributes.imageURL
+				} download=${ props.attributes.showDownload.toString() } print=${ props.attributes.showPrint.toString() } fullscreen=${ props.attributes.showFullscreen.toString() } fullscreen_target=${ props.attributes.openFullscreen.toString() } fullscreen_text="${
+					props.attributes.fullscreenText
+				}" zoom=${ props.attributes.viewerScale.toString() }  ]` }
 			</div>
 		);
 	},

@@ -28,6 +28,7 @@ function pdfjs_register_gutenberg_card_block() {
 		'pdfjs_embed_height'           => get_option( 'pdfjs_embed_height', 800 ),
 		'pdfjs_embed_width'            => get_option( 'pdfjs_embed_width', 0 ),
 		'pdfjs_viewer_scale'           => get_option( 'pdfjs_viewer_scale', 0 ),
+		'pdfjs_viewer_url'             => plugin_dir_url( __DIR__ ) . 'pdfjs/web/viewer.php',
 	);
 	wp_localize_script( 'gutenberg-pdfjs', 'pdfjs_options', $pdfjs_array );
 
