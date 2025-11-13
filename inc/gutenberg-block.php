@@ -3,6 +3,25 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
 
 /**
+ * Get all PDF.js plugin options as a normalized array.
+ *
+ * @return array Plugin options with consistent keys and values.
+ */
+function pdfjs_get_options() {
+	return array(
+		'pdfjs_viewer_url'             => plugin_dir_url( dirname( __FILE__ ) ) . 'pdfjs/web/viewer.php',
+		'pdfjs_download_button'        => get_option( 'pdfjs_download_button', 'on' ),
+		'pdfjs_print_button'           => get_option( 'pdfjs_print_button', 'on' ),
+		'pdfjs_fullscreen_link'        => get_option( 'pdfjs_fullscreen_link', 'on' ),
+		'pdfjs_fullscreen_link_text'   => get_option( 'pdfjs_fullscreen_link_text', 'View Fullscreen' ),
+		'pdfjs_fullscreen_link_target' => get_option( 'pdfjs_fullscreen_link_target', '' ),
+		'pdfjs_embed_height'           => get_option( 'pdfjs_embed_height', 800 ),
+		'pdfjs_embed_width'            => get_option( 'pdfjs_embed_width', 0 ),
+		'pdfjs_viewer_scale'           => get_option( 'pdfjs_viewer_scale', 0 ),
+	);
+}
+
+/**
  * Gutenberg Block
  */
 function pdfjs_register_gutenberg_card_block() {
@@ -36,18 +55,7 @@ function pdfjs_register_gutenberg_card_block() {
 		true
 	);
 
-	$pdfjs_array = array(
-		'pdfjs_download_button'        => get_option( 'pdfjs_download_button', 'on' ),
-		'pdfjs_print_button'           => get_option( 'pdfjs_print_button', 'on' ),
-		'pdfjs_fullscreen_link'        => get_option( 'pdfjs_fullscreen_link', 'on' ),
-		'pdfjs_fullscreen_link_text'   => get_option( 'pdfjs_fullscreen_link_text', 'View Fullscreen' ),
-		'pdfjs_fullscreen_link_target' => get_option( 'pdfjs_fullscreen_link_target', '' ),
-		'pdfjs_embed_height'           => get_option( 'pdfjs_embed_height', 800 ),
-		'pdfjs_embed_width'            => get_option( 'pdfjs_embed_width', 0 ),
-		'pdfjs_viewer_scale'           => get_option( 'pdfjs_viewer_scale', 0 ),
-		'pdfjs_viewer_url'             => plugin_dir_url( __DIR__ ) . 'pdfjs/web/viewer.php',
-	);
-	wp_localize_script( $script_handle, 'pdfjs_options', $pdfjs_array );
+	wp_localize_script( $script_handle, 'pdfjs_options', pdfjs_get_options() );
 
 	if ( file_exists( $style_file ) ) {
 		$style_handle = 'gutenberg-pdfjs-style';
