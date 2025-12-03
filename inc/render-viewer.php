@@ -57,14 +57,14 @@ function pdfjs_render_viewer( $args ) {
 	$file_url          = sanitize_url( $args['url'] );
 	$pdfjs_custom_page = false; // DISABLED get_option( 'pdfjs_custom_page', '' );
 
-	// Store settings in transients for viewer.php to access.
-	set_transient( 'pdfjs_button_download_' . $attachment_id, $download );
-	set_transient( 'pdfjs_button_print_' . $attachment_id, $print );
-	set_transient( 'pdfjs_button_openfile_' . $attachment_id, $openfile );
-	set_transient( 'pdfjs_button_zoom_' . $attachment_id, $zoom );
-	set_transient( 'pdfjs_button_pagemode_' . $attachment_id, $pagemode );
-	set_transient( 'pdfjs_button_searchbutton_' . $attachment_id, $searchbutton );
-	set_transient( 'pdfjs_button_editingbuttons_' . $attachment_id, $editingbuttons );
+	// Store settings in transients for viewer.php to access (expires in 1 hour).
+	set_transient( 'pdfjs_button_download_' . $attachment_id, $download, 3600 );
+	set_transient( 'pdfjs_button_print_' . $attachment_id, $print, 3600 );
+	set_transient( 'pdfjs_button_openfile_' . $attachment_id, $openfile, 3600 );
+	set_transient( 'pdfjs_button_zoom_' . $attachment_id, $zoom, 3600 );
+	set_transient( 'pdfjs_button_pagemode_' . $attachment_id, $pagemode, 3600 );
+	set_transient( 'pdfjs_button_searchbutton_' . $attachment_id, $searchbutton, 3600 );
+	set_transient( 'pdfjs_button_editingbuttons_' . $attachment_id, $editingbuttons, 3600 );
 
 	// Decode URL if encoded.
 	if ( strpos( $file_url, '%2F' ) ) {
@@ -92,7 +92,7 @@ function pdfjs_render_viewer( $args ) {
 	// Check if PDF URL has a different host than the current site.
 	if ( ! empty( $parsed_file['host'] ) && $parsed_file['host'] !== $parsed_site['host'] ) {
 		// External URL detected - return error message with details.
-		return '<div class="pdfjs-error" style="padding: 20px; border: 2px solid #dc3232; background: #f8d7da; color: #721c24; margin: 20px 0;">' .
+		return '<div class="pdfjs-error" role="alert" style="padding: 20px; border: 2px solid #dc3232; background: #f8d7da; color: #721c24; margin: 20px 0;">' .
 			'<p style="margin: 0 0 10px 0;"><strong>' . esc_html__( 'Security Error:', 'pdfjs-viewer-shortcode' ) . '</strong> ' .
 			esc_html__( 'PDF files must be hosted on the same domain as this site.', 'pdfjs-viewer-shortcode' ) . '</p>' .
 			'<p style="margin: 0; font-size: 0.9em;">' .
