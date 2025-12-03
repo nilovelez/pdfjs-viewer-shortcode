@@ -189,14 +189,23 @@ function pdfjs_render_viewer( $args ) {
 	if ( preg_match('/[^A-Za-z0-9_\-\.~:\/\?#\[\]@!$&\'\(\)\*\+,;=%]/', $file_url ) ) {
 		$file_url_for_param = urlencode( $file_url );
 	}
-	$attachment_info = '?file=' . $file_url_for_param . '&attachment_id=' . $attachment_id;
+	// Build base query args in a structured way for consistency and performance
+	$query_args = array(
+		'file'         => $file_url_for_param,
+		'attachment_id'=> $attachment_id,
+		'dButton'      => $download,
+		'pButton'      => $print,
+		'oButton'      => $openfile,
+		'sButton'      => $searchbutton,
+		'editButtons'  => $editingbuttons,
+	);
 	// Note: pagemode is applied via JavaScript in viewer.php from the options page setting, not from URL
 	// Add zoom to URL hash only if non-default
 	$zoom_hash = '';
 	if ( ! empty( $zoom ) && 'auto' !== $zoom ) {
 		$zoom_hash = '#zoom=' . rawurlencode( $zoom );
 	}
-	$final_url = $viewer_base_url . $attachment_info . '&dButton=' . $download . '&pButton=' . $print . '&oButton=' . $openfile . '&sButton=' . $searchbutton . '&editButtons=' . $editingbuttons . $zoom_hash;
+	$final_url = add_query_arg( $query_args, $viewer_base_url ) . $zoom_hash;
 
 	// Build fullscreen link.
 	$fullscreen_link = '';

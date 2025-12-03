@@ -53,7 +53,7 @@ function pdfjs_maybe_show_update_notice() {
 	// Enqueue inline script for AJAX dismissal.
 	wp_enqueue_script( 'jquery' );
 	?>
-	<div id="pdfjs-update-notice" class="notice notice-info is-dismissible" data-nonce="<?php echo esc_attr( wp_create_nonce( 'pdfjs_dismiss_notice_ajax' ) ); ?>">
+	<div id="pdfjs-update-notice" class="notice notice-info is-dismissible" role="alert" aria-live="polite" data-nonce="<?php echo esc_attr( wp_create_nonce( 'pdfjs_dismiss_notice_ajax' ) ); ?>">
 		<p><?php echo esc_html( $message ); ?></p>
 		<p><a href="<?php echo esc_url( $dismiss_url ); ?>" class="button button-secondary"><?php esc_html_e( 'Dismiss', 'pdfjs-viewer-shortcode' ); ?></a></p>
 	</div>

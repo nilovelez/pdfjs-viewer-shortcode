@@ -96,53 +96,53 @@ function pdfjs_options_page() {
 			?>
 
 			<h2 class="title"><?php esc_html_e( 'Defaults', 'pdfjs-viewer-shortcode' ); ?></h2>
-			<p>
+			<p id="pdfjs-defaults-help">
 				<?php esc_html_e( 'Most defaults only affect new posts and existing posts when you edit them. Not all options work with the shortcode.', 'pdfjs-viewer-shortcode' ); ?>
 			</p>
 			<table class="form-table" role="presentation">
 				<tr>
 					<th scope="row"><label for="pdfjs_download_button"><?php esc_html_e( 'Show Save Button', 'pdfjs-viewer-shortcode' ); ?></label></th>
-					<td><input type="checkbox" id="pdfjs_download_button" name="pdfjs_download_button" <?php checked( $download_button, 'on' ); ?> /></td>
+					<td><input type="checkbox" id="pdfjs_download_button" name="pdfjs_download_button" aria-describedby="pdfjs-defaults-help" <?php checked( $download_button, 'on' ); ?> /></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_print_button"><?php esc_html_e( 'Show Print Button', 'pdfjs-viewer-shortcode' ); ?></label></th>
-					<td><input type="checkbox" id="pdfjs_print_button" name="pdfjs_print_button" <?php checked( $print_button, 'on' ); ?> /></td>
+					<td><input type="checkbox" id="pdfjs_print_button" name="pdfjs_print_button" aria-describedby="pdfjs-defaults-help" <?php checked( $print_button, 'on' ); ?> /></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_search_button"><?php esc_html_e( 'Show Search Button', 'pdfjs-viewer-shortcode' ); ?> <sup>1</sup></label></th>
-					<td><input type="checkbox" id="pdfjs_search_button" name="pdfjs_search_button" <?php checked( $search_button, 'on' ); ?> /></td>
+					<td><input type="checkbox" id="pdfjs_search_button" name="pdfjs_search_button" aria-describedby="pdfjs-global-help" <?php checked( $search_button, 'on' ); ?> /></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_editing_buttons"><?php esc_html_e( 'Show Editing Buttons', 'pdfjs-viewer-shortcode' ); ?> <sup>1</sup></label></th>
-					<td><input type="checkbox" id="pdfjs_editing_buttons" name="pdfjs_editing_buttons" <?php checked( $editing_buttons, 'on' ); ?> /></td>
+					<td><input type="checkbox" id="pdfjs_editing_buttons" name="pdfjs_editing_buttons" aria-describedby="pdfjs-global-help" <?php checked( $editing_buttons, 'on' ); ?> /></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_fullscreen_link"><?php esc_html_e( 'Show Fullscreen Link', 'pdfjs-viewer-shortcode' ); ?></label></th>
-					<td><input type="checkbox" id="pdfjs_fullscreen_link" name="pdfjs_fullscreen_link" <?php checked( $fullscreen_link, 'on' ); ?> /></td>
+					<td><input type="checkbox" id="pdfjs_fullscreen_link" name="pdfjs_fullscreen_link" aria-describedby="pdfjs-defaults-help" <?php checked( $fullscreen_link, 'on' ); ?> /></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_fullscreen_link_text"><?php esc_html_e( 'Fullscreen Link Text', 'pdfjs-viewer-shortcode' ); ?></label></th>
-					<td><input type="text" class="regular-text" id="pdfjs_fullscreen_link_text" name="pdfjs_fullscreen_link_text" value="<?php echo esc_html( $fullscreen_link_text ? $fullscreen_link_text : 'View Fullscreen' ); ?>" /></td>
+					<td><input type="text" class="regular-text" id="pdfjs_fullscreen_link_text" name="pdfjs_fullscreen_link_text" aria-describedby="pdfjs-defaults-help" value="<?php echo esc_html( $fullscreen_link_text ? $fullscreen_link_text : 'View Fullscreen' ); ?>" /></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_fullscreen_link_target"><?php esc_html_e( 'Fullscreen Links in New Tabs', 'pdfjs-viewer-shortcode' ); ?></label></th>
-					<td><input type="checkbox" id="pdfjs_fullscreen_link_target" name="pdfjs_fullscreen_link_target" <?php checked( $link_target, 'on' ); ?> /></td>
+					<td><input type="checkbox" id="pdfjs_fullscreen_link_target" name="pdfjs_fullscreen_link_target" aria-describedby="pdfjs-defaults-help" <?php checked( $link_target, 'on' ); ?> /></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_embed_height"><?php esc_html_e( 'Embed Height', 'pdfjs-viewer-shortcode' ); ?></label></th>
-					<td><input type="number" class="regular-text" id="pdfjs_embed_height" name="pdfjs_embed_height" value="<?php echo esc_html( $embed_height ? $embed_height : 800 ); ?>" /></td>
+					<td><input type="number" class="regular-text" id="pdfjs_embed_height" name="pdfjs_embed_height" aria-describedby="pdfjs-defaults-help" value="<?php echo esc_html( $embed_height ? $embed_height : 800 ); ?>" /></td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_embed_width"><?php esc_html_e( 'Embed Width', 'pdfjs-viewer-shortcode' ); ?></label></th>
 					<td>
-						<input type="number" class="regular-text" id="pdfjs_embed_width" name="pdfjs_embed_width" value="<?php echo esc_html( $embed_width ? $embed_width : 0 ); ?>" />
-						<p><?php esc_html_e( 'Note: 0 = 100%', 'pdfjs-viewer-shortcode' ); ?></p>
+						<input type="number" class="regular-text" id="pdfjs_embed_width" name="pdfjs_embed_width" aria-describedby="pdfjs-width-note pdfjs-defaults-help" value="<?php echo esc_html( $embed_width ? $embed_width : 0 ); ?>" />
+						<p id="pdfjs-width-note"><?php esc_html_e( 'Note: 0 = 100%', 'pdfjs-viewer-shortcode' ); ?></p>
 					</td>
 				</tr>
 				<tr>
 					<th scope="row"><label for="pdfjs_viewer_scale"><?php esc_html_e( 'Viewer Scale', 'pdfjs-viewer-shortcode' ); ?> <sup>1</sup></label></th>
 					<td>
-						<select id="pdfjs_viewer_scale" name="pdfjs_viewer_scale">
+						<select id="pdfjs_viewer_scale" name="pdfjs_viewer_scale" aria-describedby="pdfjs-global-help">
 							<option value="auto" <?php selected( $viewer_scale, 'auto' ); ?>>Auto</option>
 							<option value="page-actual" <?php selected( $viewer_scale, 'page-actual' ); ?>>Actual Size</option>
 							<option value="page-fit" <?php selected( $viewer_scale, 'page-fit' ); ?>>Page Fit</option>
@@ -160,7 +160,7 @@ function pdfjs_options_page() {
 				<tr>
 					<th scope="row"><label for="pdfjs_viewer_pagemode"><?php esc_html_e( 'Page Mode (aka Sidebar)', 'pdfjs-viewer-shortcode' ); ?> <sup>1</sup></label></th>
 					<td>
-						<select id="pdfjs_viewer_pagemode" name="pdfjs_viewer_pagemode">
+						<select id="pdfjs_viewer_pagemode" name="pdfjs_viewer_pagemode" aria-describedby="pdfjs-global-help">
 							<option value="none" <?php selected( $viewer_pagemode, 'none' ); ?>>None</option>
 							<option value="thumbs" <?php selected( $viewer_pagemode, 'thumbs' ); ?>>Thumbs</option>
 							<option value="bookmarks" <?php selected( $viewer_pagemode, 'bookmarks' ); ?>>Bookmarks</option>
@@ -174,11 +174,11 @@ function pdfjs_options_page() {
 				</tr>
 			</table>
 			<?php submit_button(); ?>
-			<p>
+			<p id="pdfjs-recovery-help">
 				<?php esc_html_e( 'When editing existing content, it may cause existing blocks to have "unexpected or invalid content" upon editing. Don\'t worry, just click the three little dots, choose "Attempt Block Recovery", and everything should be working again. This "unexpected or invalid content" will not affect live content, just content in the editor.', 'pdfjs-viewer-shortcode' ); ?>
 			</p>
-			<p>
-				<sup>1</sup> <?php esc_html_e( 'These options are not customizable per page/post at this time. Only globally.' ); ?>
+			<p id="pdfjs-global-help">
+				<sup>1</sup> <?php esc_html_e( 'These options are not customizable per page/post at this time. Only globally.', 'pdfjs-viewer-shortcode' ); ?>
 			</p>
 		</form>
 	</div>
