@@ -339,6 +339,10 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 								'pdfjs-viewer-shortcode'
 							) }
 						>
+							<div className="pdfjs-preview-link">
+								{ props.attributes.showFullscreen.toString() ===
+									'true' && props.attributes.fullscreenText }
+							</div>
 							<iframe
 								src={ iframeSrc }
 								width={ viewerWidthAttr }
