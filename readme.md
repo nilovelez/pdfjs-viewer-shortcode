@@ -62,6 +62,10 @@ Want to help develop the plugin? Found a bug? [Find us on GitHub](https://github
 
 Older blocks will be marked as _invalid_ in Gutenberg as we add new features. You just need to "[Attempt Block Recovery](https://www.kadenceblocks.com/docs/how-to-recover-a-broken-block/)" and that should update it.
 
+### Admin Notice After Updates
+
+When you update the plugin, editors may see an admin banner explaining that Gutenberg could show an “Attempt Block Recovery” prompt when editing older posts with PDFs. Clicking it updates the block format; it does not affect what visitors see. You can dismiss the banner, and it won’t reappear until a future release enables it again.
+
 ## Installation
 
 This plugin can be installed either directly from your WordPress admin panel by searching for **PDF.js Viewer**, or downloading from the Wordpress Plugin Repository and uploading and expanding the archive into your sites `wp-content/plugins` directory.
@@ -88,10 +92,10 @@ This plugin can be installed either directly from your WordPress admin panel by 
 -   Updated build toolchain (Sass, webpack, Node 18+ requirement)
 -   Removed unused code and improved code organization
 -   Added `.nvmrc` for Node version management
--   Enhanced `.gitignore` for build outputs
--   Improved developer documentation in README
 -   Fixed PHP Warning: Undefined array key "editButtons" thanks to retroflexer
 -   PDF preview in Gutenberg block
+-   Admin notice for block recovery after updates
+-   Accessibility improvements.
 
 ### 2.2.3
 
