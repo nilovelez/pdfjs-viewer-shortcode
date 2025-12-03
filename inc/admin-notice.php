@@ -2,6 +2,43 @@
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
 
 /**
+ * Helper: Can current user edit posts (site-wide notice audience)?
+ */
+function pdfjs_user_can_edit_posts() {
+	return is_admin() && current_user_can( 'edit_posts' );
+}
+
+/**
+ * Helper: Resolve the current notice key (constant -> filter -> plugin version).
+ */
+function pdfjs_get_notice_key() {
+	if ( ! defined( 'PDFJS_PLUGIN_VERSION' ) ) {
+		return '';
+	}
+	$default_key = defined( 'PDFJS_NOTICE_KEY' ) ? PDFJS_NOTICE_KEY : PDFJS_PLUGIN_VERSION;
+	return apply_filters( 'pdfjs_update_notice_key', $default_key );
+}
+
+/**
+ * Helper: Determine if the notice should be shown.
+ */
+function pdfjs_should_show_notice() {
+	if ( ! pdfjs_user_can_edit_posts() ) {
+		return false;
+	}
+	$notice_key = pdfjs_get_notice_key();
+	if ( empty( $notice_key ) ) {
+		return false;
+	}
+	$last_shown_key     = get_option( 'pdfjs_notice_key', '' );
+	$last_shown_version = get_option( 'pdfjs_notice_version', '' );
+	if ( $notice_key === $last_shown_key || ( defined( 'PDFJS_PLUGIN_VERSION' ) && PDFJS_PLUGIN_VERSION === $notice_key && PDFJS_PLUGIN_VERSION === $last_shown_version ) ) {
+		return false;
+	}
+	return true;
+}
+
+/**
  * Show a dismissible admin notice to inform editors about block recovery
  * for PDF blocks. The notice display is controlled by a "notice key"
  * which defaults to the plugin version, but can be overridden via
@@ -15,29 +52,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
  * - Return an empty value in the filter to disable the notice entirely.
  */
 function pdfjs_maybe_show_update_notice() {
-	// Only in admin and for users who can edit posts.
-	if ( ! is_admin() || ! current_user_can( 'edit_posts' ) ) {
-		return;
-	}
-
-	// If version constant is missing, bail.
-	if ( ! defined( 'PDFJS_PLUGIN_VERSION' ) ) {
-		return;
-	}
-
-	// Resolve the current notice key: constant -> filter -> plugin version.
-	$default_key = defined( 'PDFJS_NOTICE_KEY' ) ? PDFJS_NOTICE_KEY : PDFJS_PLUGIN_VERSION;
-	$notice_key  = apply_filters( 'pdfjs_update_notice_key', $default_key );
-
-	// Empty key disables the notice entirely.
-	if ( empty( $notice_key ) ) {
-		return;
-	}
-
-	// Back-compat: consider previous stored version value as shown when key === version
-	$last_shown_key     = get_option( 'pdfjs_notice_key', '' );
-	$last_shown_version = get_option( 'pdfjs_notice_version', '' );
-	if ( $notice_key === $last_shown_key || ( PDFJS_PLUGIN_VERSION === $notice_key && PDFJS_PLUGIN_VERSION === $last_shown_version ) ) {
+	if ( ! pdfjs_should_show_notice() ) {
 		return;
 	}
 
@@ -50,12 +65,13 @@ function pdfjs_maybe_show_update_notice() {
 	// Translators: Message about block recovery after plugin updates.
 	$message = __( "PDFjs Viewer has been updated.\n\nIf you edit a post that contains a PDF, you may see a message with an \"Attempt Block Recovery\" button. Simply click it as this is a normal part of how WordPress handles updates.\n\nIf you choose not to recover the block, your existing PDFs will still work perfectly, and your visitors won't see any changes.", 'pdfjs-viewer-shortcode' );
 
-	// Enqueue inline script for AJAX dismissal.
-	wp_enqueue_script( 'jquery' );
+	// Enqueue admin script handle; inline code will attach to this handle.
+	wp_register_script( 'pdfjs-admin-notice', false, array( 'jquery' ), PDFJS_PLUGIN_VERSION, true );
+	wp_enqueue_script( 'pdfjs-admin-notice' );
 	?>
 	<div id="pdfjs-update-notice" class="notice notice-info is-dismissible" role="alert" aria-live="polite" data-nonce="<?php echo esc_attr( wp_create_nonce( 'pdfjs_dismiss_notice_ajax' ) ); ?>">
 		<p><?php echo esc_html( $message ); ?></p>
-		<p><a href="<?php echo esc_url( $dismiss_url ); ?>" class="button button-secondary"><?php esc_html_e( 'Dismiss', 'pdfjs-viewer-shortcode' ); ?></a></p>
+		<p><a href="<?php echo esc_url( $dismiss_url ); ?>" class="button button-secondary pdfjs-dismiss-btn" role="button" aria-label="<?php esc_attr_e( 'Dismiss notice', 'pdfjs-viewer-shortcode' ); ?>"><?php esc_html_e( 'Dismiss', 'pdfjs-viewer-shortcode' ); ?></a></p>
 	</div>
 	<?php
 }
@@ -65,43 +81,33 @@ add_action( 'admin_notices', 'pdfjs_maybe_show_update_notice' );
  * Enqueue admin script for AJAX notice dismissal.
  */
 function pdfjs_enqueue_notice_script() {
-	if ( ! is_admin() || ! current_user_can( 'edit_posts' ) ) {
-		return;
-	}
-
-	// Check if notice would be shown.
-	if ( ! defined( 'PDFJS_PLUGIN_VERSION' ) ) {
-		return;
-	}
-
-	$default_key = defined( 'PDFJS_NOTICE_KEY' ) ? PDFJS_NOTICE_KEY : PDFJS_PLUGIN_VERSION;
-	$notice_key  = apply_filters( 'pdfjs_update_notice_key', $default_key );
-
-	if ( empty( $notice_key ) ) {
-		return;
-	}
-
-	$last_shown_key     = get_option( 'pdfjs_notice_key', '' );
-	$last_shown_version = get_option( 'pdfjs_notice_version', '' );
-	if ( $notice_key === $last_shown_key || ( PDFJS_PLUGIN_VERSION === $notice_key && PDFJS_PLUGIN_VERSION === $last_shown_version ) ) {
+	if ( ! pdfjs_should_show_notice() ) {
 		return;
 	}
 
 	// Only enqueue if notice is visible.
 	$script = "
 		jQuery(function($) {
-			$('#pdfjs-update-notice').on('click', '.notice-dismiss', function(e) {
-				e.preventDefault();
+			function pdfjsDismissNoticeAjax() {
 				var notice = $('#pdfjs-update-notice');
 				var nonce = notice.data('nonce');
 				$.post(ajaxurl, {
 					action: 'pdfjs_dismiss_notice_ajax',
 					nonce: nonce
+				}).done(function(){
+					// Hide the notice without page refresh
+					notice.slideUp(150, function(){ notice.remove(); });
 				});
+			}
+
+			// Handle click on both the built-in X and our Dismiss button
+			$('#pdfjs-update-notice').on('click', '.notice-dismiss, .pdfjs-dismiss-btn', function(e) {
+				e.preventDefault();
+				pdfjsDismissNoticeAjax();
 			});
 		});
 	";
-	wp_add_inline_script( 'jquery', $script );
+	wp_add_inline_script( 'pdfjs-admin-notice', $script );
 }
 add_action( 'admin_enqueue_scripts', 'pdfjs_enqueue_notice_script' );
 
@@ -114,15 +120,14 @@ function pdfjs_dismiss_notice_handler() {
 	}
 
 	// Capability: allow editors and above to dismiss for the site.
-	if ( ! current_user_can( 'edit_posts' ) ) {
+	if ( ! pdfjs_user_can_edit_posts() ) {
 		wp_die( esc_html__( 'Insufficient permissions.', 'pdfjs-viewer-shortcode' ) );
 	}
 
 	check_admin_referer( 'pdfjs_dismiss_notice' );
 
 	// Store dismissal against the current resolved key.
-	$default_key = defined( 'PDFJS_NOTICE_KEY' ) ? PDFJS_NOTICE_KEY : ( defined( 'PDFJS_PLUGIN_VERSION' ) ? PDFJS_PLUGIN_VERSION : '' );
-	$notice_key  = apply_filters( 'pdfjs_update_notice_key', $default_key );
+	$notice_key  = pdfjs_get_notice_key();
 	if ( ! empty( $notice_key ) ) {
 		update_option( 'pdfjs_notice_key', $notice_key );
 	}
@@ -148,14 +153,13 @@ function pdfjs_dismiss_notice_ajax_handler() {
 		wp_send_json_error();
 	}
 
-	if ( ! current_user_can( 'edit_posts' ) ) {
+	if ( ! pdfjs_user_can_edit_posts() ) {
 		wp_send_json_error();
 	}
 
 	check_ajax_referer( 'pdfjs_dismiss_notice_ajax', 'nonce' );
 
-	$default_key = defined( 'PDFJS_NOTICE_KEY' ) ? PDFJS_NOTICE_KEY : ( defined( 'PDFJS_PLUGIN_VERSION' ) ? PDFJS_PLUGIN_VERSION : '' );
-	$notice_key  = apply_filters( 'pdfjs_update_notice_key', $default_key );
+	$notice_key  = pdfjs_get_notice_key();
 	if ( ! empty( $notice_key ) ) {
 		update_option( 'pdfjs_notice_key', $notice_key );
 	}

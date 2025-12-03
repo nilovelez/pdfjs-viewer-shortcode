@@ -24,7 +24,7 @@ if ( ! defined( 'PDFJS_PLUGIN_VERSION' ) ) {
 // where you want to show the block recovery notice. Leave empty to disable.
 // Example: 'block-recovery-2025-12'. Users can still override via filter.
 if ( ! defined( 'PDFJS_NOTICE_KEY' ) ) {
-	define( 'PDFJS_NOTICE_KEY', 'block-recovery-2025-12' );
+	define( 'PDFJS_NOTICE_KEY', 'block-recovery-2025-12.2' );
 }
 
 /**
