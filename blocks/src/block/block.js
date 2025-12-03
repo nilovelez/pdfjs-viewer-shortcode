@@ -277,8 +277,8 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 					/>
 				</PanelBody>
 			</InspectorControls>,
-			<div className="pdfjs-wrapper components-placeholder" key="i2">
-				<div>
+			<div className="pdfjs-wrapper" key="i2">
+				<div className="pdfjs-header">
 					<strong>
 						{ __( 'PDF.js Embed', 'pdfjs-viewer-shortcode' ) }
 					</strong>
