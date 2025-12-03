@@ -39,6 +39,17 @@ function pdfjs_render_viewer( $args ) {
 
 	$args = wp_parse_args( $args, $defaults );
 
+	// Cache plugin options to avoid repeated DB queries on pages with multiple PDFs.
+	static $cached_pagemode = null;
+	static $cached_searchbutton = null;
+	static $cached_editingbuttons = null;
+	
+	if ( null === $cached_pagemode ) {
+		$cached_pagemode = get_option( 'pdfjs_viewer_pagemode', 'none' );
+		$cached_searchbutton = get_option( 'pdfjs_search_button', 'on' );
+		$cached_editingbuttons = get_option( 'pdfjs_editing_buttons', 'on' );
+	}
+	
 	// Sanitize and validate inputs.
 	$viewer_base_url   = plugin_dir_url( dirname( __FILE__ ) ) . 'pdfjs/web/viewer.php';
 	$viewer_height     = pdfjs_is_percent_or_pixel( $args['viewer_height'] );
@@ -50,10 +61,10 @@ function pdfjs_render_viewer( $args ) {
 	$print             = pdfjs_set_true_false( $args['print'] );
 	$openfile          = pdfjs_set_true_false( $args['openfile'] );
 	$zoom              = pdfjs_validate_zoom( $args['zoom'] );
-	$pagemode          = get_option( 'pdfjs_viewer_pagemode', 'none' );
-	$searchbutton      = get_option( 'pdfjs_search_button', 'on' );
-	$editingbuttons    = get_option( 'pdfjs_editing_buttons', 'on' );
-	$attachment_id     = pdfjs_sanatize_number( $args['attachment_id'] );
+	$pagemode          = $cached_pagemode;
+	$searchbutton      = $cached_searchbutton;
+	$editingbuttons    = $cached_editingbuttons;
+	$attachment_id     = pdfjs_sanitize_number( $args['attachment_id'] );
 	$file_url          = sanitize_url( $args['url'] );
 	$pdfjs_custom_page = false; // DISABLED get_option( 'pdfjs_custom_page', '' );
 

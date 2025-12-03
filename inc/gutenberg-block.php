@@ -4,11 +4,18 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
 
 /**
  * Get all PDF.js plugin options as a normalized array.
+ * Cached in static variable to prevent repeated database queries.
  *
  * @return array Plugin options with consistent keys and values.
  */
 function pdfjs_get_options() {
-	return array(
+	static $cached_options = null;
+	
+	if ( null !== $cached_options ) {
+		return $cached_options;
+	}
+	
+	$cached_options = array(
 		'pdfjs_viewer_url'             => plugin_dir_url( dirname( __FILE__ ) ) . 'pdfjs/web/viewer.php',
 		'pdfjs_download_button'        => get_option( 'pdfjs_download_button', 'on' ),
 		'pdfjs_print_button'           => get_option( 'pdfjs_print_button', 'on' ),
@@ -19,6 +26,8 @@ function pdfjs_get_options() {
 		'pdfjs_embed_width'            => get_option( 'pdfjs_embed_width', 0 ),
 		'pdfjs_viewer_scale'           => get_option( 'pdfjs_viewer_scale', 0 ),
 	);
+	
+	return $cached_options;
 }
 
 /**

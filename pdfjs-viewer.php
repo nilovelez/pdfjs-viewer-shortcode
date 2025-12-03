@@ -39,6 +39,11 @@ require 'inc/embed.php';
 require 'inc/render-viewer.php';
 
 /**
+ * Cleanup hooks
+ */
+require 'inc/cleanup-hooks.php';
+
+/**
  * Shortcode
  */
 require 'inc/shortcode.php';
