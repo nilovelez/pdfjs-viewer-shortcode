@@ -43,6 +43,25 @@ function pdfjs_register_settings() {
 }
 add_action( 'admin_init', 'pdfjs_register_settings' );
 
+/**
+ * Clear cache when settings are updated.
+ */
+function pdfjs_clear_options_cache() {
+	wp_cache_delete( 'pdfjs_options', 'pdfjs' );
+	wp_cache_delete( 'pdfjs_viewer_options', 'pdfjs' );
+}
+add_action( 'update_option_pdfjs_download_button', 'pdfjs_clear_options_cache' );
+add_action( 'update_option_pdfjs_print_button', 'pdfjs_clear_options_cache' );
+add_action( 'update_option_pdfjs_fullscreen_link', 'pdfjs_clear_options_cache' );
+add_action( 'update_option_pdfjs_fullscreen_link_text', 'pdfjs_clear_options_cache' );
+add_action( 'update_option_pdfjs_fullscreen_link_target', 'pdfjs_clear_options_cache' );
+add_action( 'update_option_pdfjs_embed_height', 'pdfjs_clear_options_cache' );
+add_action( 'update_option_pdfjs_embed_width', 'pdfjs_clear_options_cache' );
+add_action( 'update_option_pdfjs_viewer_scale', 'pdfjs_clear_options_cache' );
+add_action( 'update_option_pdfjs_viewer_pagemode', 'pdfjs_clear_options_cache' );
+add_action( 'update_option_pdfjs_search_button', 'pdfjs_clear_options_cache' );
+add_action( 'update_option_pdfjs_editing_buttons', 'pdfjs_clear_options_cache' );
+
 function pdfjs_register_options_page() {
 	global $pdfjs_settings_page;
 	$pdfjs_settings_page = add_options_page( 'PDFjs Settings', 'PDFjs Viewer', 'manage_options', 'pdfjs', 'pdfjs_options_page' );

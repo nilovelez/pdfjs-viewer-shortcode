@@ -45,9 +45,23 @@ function pdfjs_render_viewer( $args ) {
 	static $cached_editingbuttons = null;
 	
 	if ( null === $cached_pagemode ) {
-		$cached_pagemode = get_option( 'pdfjs_viewer_pagemode', 'none' );
-		$cached_searchbutton = get_option( 'pdfjs_search_button', 'on' );
-		$cached_editingbuttons = get_option( 'pdfjs_editing_buttons', 'on' );
+		// Try object cache first
+		$cached_options = wp_cache_get( 'pdfjs_viewer_options', 'pdfjs' );
+		if ( false !== $cached_options ) {
+			$cached_pagemode = $cached_options['pagemode'];
+			$cached_searchbutton = $cached_options['searchbutton'];
+			$cached_editingbuttons = $cached_options['editingbuttons'];
+		} else {
+			$cached_pagemode = get_option( 'pdfjs_viewer_pagemode', 'none' );
+			$cached_searchbutton = get_option( 'pdfjs_search_button', 'on' );
+			$cached_editingbuttons = get_option( 'pdfjs_editing_buttons', 'on' );
+			// Cache for 1 hour
+			wp_cache_set( 'pdfjs_viewer_options', array(
+				'pagemode' => $cached_pagemode,
+				'searchbutton' => $cached_searchbutton,
+				'editingbuttons' => $cached_editingbuttons,
+			), 'pdfjs', 3600 );
+		}
 	}
 	
 	// Sanitize and validate inputs.
@@ -64,8 +78,50 @@ function pdfjs_render_viewer( $args ) {
 	$pagemode          = $cached_pagemode;
 	$searchbutton      = $cached_searchbutton;
 	$editingbuttons    = $cached_editingbuttons;
-	$attachment_id     = pdfjs_sanitize_number( $args['attachment_id'] );
-	$file_url          = sanitize_url( $args['url'] );
+	
+	// Prioritize attachment_id over url for security
+	$attachment_id = pdfjs_sanitize_number( $args['attachment_id'] );
+	$file_url = '';
+	
+	if ( ! empty( $attachment_id ) && $attachment_id > 0 ) {
+		// Verify attachment exists and is valid
+		$attachment = get_post( $attachment_id );
+		if ( $attachment && 'attachment' === $attachment->post_type ) {
+			// Check if attachment is accessible
+			if ( 'private' !== $attachment->post_status || current_user_can( 'read_private_posts' ) ) {
+				// Verify the file is actually a PDF
+				$mime_type = get_post_mime_type( $attachment_id );
+				if ( 'application/pdf' === $mime_type ) {
+					$file_url = wp_get_attachment_url( $attachment_id );
+				}
+			}
+		}
+	}
+	
+	// Fallback to URL parameter if attachment_id not available or invalid
+	if ( empty( $file_url ) ) {
+		$file_url = sanitize_url( $args['url'] );
+		
+		// Decode URL if encoded, but validate after decoding
+		if ( strpos( $file_url, '%' ) !== false ) {
+			$decoded_url = urldecode( $file_url );
+			// Re-validate after decoding
+			if ( filter_var( $decoded_url, FILTER_VALIDATE_URL ) ) {
+				$file_url = sanitize_url( $decoded_url );
+			}
+		}
+		
+		// Fix double-encoded http://
+		if ( strpos( $file_url, 'http://http' ) !== false ) {
+			$file_url = str_replace( 'http://http', 'http', $file_url );
+		}
+		
+		$file_url = esc_url( $file_url );
+	} else {
+		// Already validated from attachment, just escape
+		$file_url = esc_url( $file_url );
+	}
+	
 	$pdfjs_custom_page = false; // DISABLED get_option( 'pdfjs_custom_page', '' );
 
 	// Store settings in transients for viewer.php to access (expires in 1 hour).
@@ -76,13 +132,6 @@ function pdfjs_render_viewer( $args ) {
 	set_transient( 'pdfjs_button_pagemode_' . $attachment_id, $pagemode, 3600 );
 	set_transient( 'pdfjs_button_searchbutton_' . $attachment_id, $searchbutton, 3600 );
 	set_transient( 'pdfjs_button_editingbuttons_' . $attachment_id, $editingbuttons, 3600 );
-
-	// Decode URL if encoded.
-	if ( strpos( $file_url, '%2F' ) ) {
-		$file_url = urldecode( $file_url );
-		$file_url = str_replace( 'http://http', 'http', $file_url );
-		$file_url = esc_url( $file_url );
-	}
 
 	// Validate PDF URL matches current site domain for security.
 	$site_url = get_site_url();
@@ -103,7 +152,7 @@ function pdfjs_render_viewer( $args ) {
 	// Check if PDF URL has a different host than the current site.
 	if ( ! empty( $parsed_file['host'] ) && $parsed_file['host'] !== $parsed_site['host'] ) {
 		// External URL detected - return error message with details.
-		return '<div class="pdfjs-error" role="alert" style="padding: 20px; border: 2px solid #dc3232; background: #f8d7da; color: #721c24; margin: 20px 0;">' .
+		return '<div class="pdfjs-error" role="alert" aria-live="assertive" style="padding: 20px; border: 2px solid #dc3232; background: #f8d7da; color: #721c24; margin: 20px 0;">' .
 			'<p style="margin: 0 0 10px 0;"><strong>' . esc_html__( 'Security Error:', 'pdfjs-viewer-shortcode' ) . '</strong> ' .
 			esc_html__( 'PDF files must be hosted on the same domain as this site.', 'pdfjs-viewer-shortcode' ) . '</p>' .
 			'<p style="margin: 0; font-size: 0.9em;">' .
@@ -134,9 +183,21 @@ function pdfjs_render_viewer( $args ) {
 	$fullscreen_target_attr = ( 'true' === $fullscreen_target ) ? 'target="_blank"' : '';
 
 	// Build viewer URL with all parameters.
-	$attachment_info = '?file=' . $file_url . '&attachment_id=' . $attachment_id;
+	// Only encode the file URL if it contains special characters that need encoding
+	// This keeps URLs more consistent and readable
+	$file_url_for_param = $file_url;
+	if ( preg_match('/[^A-Za-z0-9_\-\.~:\/\?#\[\]@!$&\'\(\)\*\+,;=%]/', $file_url ) ) {
+		$file_url_for_param = urlencode( $file_url );
+	}
+	$attachment_info = '?file=' . $file_url_for_param . '&attachment_id=' . $attachment_id;
 	$nonce     = wp_create_nonce( 'pdfjs_full_screen' );
-	$final_url = $viewer_base_url . $attachment_info . '&dButton=' . $download . '&pButton=' . $print . '&oButton=' . $openfile . '&sButton=' . $searchbutton . '&editButtons=' . $editingbuttons . '&pagemode=' . $pagemode . '&_wpnonce=' . $nonce;
+	// Note: pagemode is applied via JavaScript in viewer.php from the options page setting, not from URL
+	// Add zoom to URL hash only if non-default
+	$zoom_hash = '';
+	if ( ! empty( $zoom ) && 'auto' !== $zoom ) {
+		$zoom_hash = '#zoom=' . rawurlencode( $zoom );
+	}
+	$final_url = $viewer_base_url . $attachment_info . '&dButton=' . $download . '&pButton=' . $print . '&oButton=' . $openfile . '&sButton=' . $searchbutton . '&editButtons=' . $editingbuttons . '&_wpnonce=' . $nonce . $zoom_hash;
 
 	// Build fullscreen link.
 	$fullscreen_link = '';
@@ -151,14 +212,22 @@ function pdfjs_render_viewer( $args ) {
 
 	// Get file name for accessible title
 	$file_name = basename( parse_url( $file_url, PHP_URL_PATH ) );
+	// Fallback to attachment title if filename extraction fails
+	if ( empty( $file_name ) && ! empty( $attachment_id ) ) {
+		$file_name = get_the_title( $attachment_id );
+	}
+	// Final fallback
+	if ( empty( $file_name ) ) {
+		$file_name = __( 'PDF Document', 'pdfjs-viewer-shortcode' );
+	}
 	$iframe_title = sprintf(
 		/* translators: %s: PDF file name */
 		esc_attr__( 'PDF document: %s', 'pdfjs-viewer-shortcode' ),
-		$file_name
+		esc_attr( $file_name )
 	);
 
 	// Build iframe with accessibility attributes.
-	$iframe_code = '<div role="region" aria-label="' . esc_attr__( 'PDF Viewer', 'pdfjs-viewer-shortcode' ) . '"><iframe width="' . esc_attr( $viewer_width ) . '" height="' . esc_attr( $viewer_height ) . '" src="' . esc_url( $final_url ) . '" title="' . $iframe_title . '" aria-label="' . $iframe_title . '" class="pdfjs-iframe" tabindex="0"></iframe></div>';
+	$iframe_code = '<a href="#pdfjs-viewer-skip" class="screen-reader-text">' . esc_html__( 'Skip to PDF content', 'pdfjs-viewer-shortcode' ) . '</a><div role="region" aria-label="' . esc_attr__( 'PDF Viewer', 'pdfjs-viewer-shortcode' ) . '" id="pdfjs-viewer-skip"><iframe width="' . esc_attr( $viewer_width ) . '" height="' . esc_attr( $viewer_height ) . '" src="' . esc_url( $final_url ) . '" title="' . $iframe_title . '" aria-label="' . $iframe_title . '" class="pdfjs-iframe" tabindex="0" loading="lazy"></iframe></div>';
 
 	return $fullscreen_link . $iframe_code;
 }

@@ -26,7 +26,7 @@
 
 		<script>
 			setTimeout(function(){
-                PDFViewerApplication.open({"url": <?php echo esc_url( $pdfjs_url ); ?>})
+                PDFViewerApplication.open({"url": <?php echo wp_json_encode( $pdfjs_url ); ?>})
 			}, 100);
 		</script>
 

@@ -9,12 +9,13 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly.
  * @return array Plugin options with consistent keys and values.
  */
 function pdfjs_get_options() {
-	static $cached_options = null;
-	
-	if ( null !== $cached_options ) {
+	// Try to get from object cache first
+	$cached_options = wp_cache_get( 'pdfjs_options', 'pdfjs' );
+	if ( false !== $cached_options ) {
 		return $cached_options;
 	}
 	
+	// Build options array
 	$cached_options = array(
 		'pdfjs_viewer_url'             => plugin_dir_url( dirname( __FILE__ ) ) . 'pdfjs/web/viewer.php',
 		'pdfjs_download_button'        => get_option( 'pdfjs_download_button', 'on' ),
@@ -26,6 +27,9 @@ function pdfjs_get_options() {
 		'pdfjs_embed_width'            => get_option( 'pdfjs_embed_width', 0 ),
 		'pdfjs_viewer_scale'           => get_option( 'pdfjs_viewer_scale', 0 ),
 	);
+	
+	// Cache for 1 hour
+	wp_cache_set( 'pdfjs_options', $cached_options, 'pdfjs', 3600 );
 	
 	return $cached_options;
 }
