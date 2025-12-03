@@ -216,13 +216,21 @@ msgstr "Insérer un PDF"
 msgid "Insert"
 msgstr "Insérer"
 
-#: templates/fullscreen.php:11
-msgid "PDF Viewer"
-msgstr "Visionneuse PDF"
+#: inc/admin-notice.php:51
+msgid "PDFjs Viewer has been updated.\\n\\nIf you edit a post that contains a PDF, you may see a message with an \\\"Attempt Block Recovery\\\" button. Simply click it—this is a normal part of how WordPress handles updates.\\n\\nIf you choose not to recover the block, your existing PDFs will still work perfectly, and your visitors won't see any changes."
+msgstr "PDFjs Viewer a été mis à jour.\\n\\nSi vous modifiez un article contenant un PDF, vous pourriez voir un message avec un bouton \\\"Tentative de récupération du bloc\\\". Cliquez simplement dessus : c'est une partie normale de la façon dont WordPress gère les mises à jour.\\n\\nSi vous choisissez de ne pas récupérer le bloc, vos PDFs existants continueront de fonctionner parfaitement et vos visiteurs ne verront aucun changement."
+
+#: inc/admin-notice.php:56
+msgid "Dismiss"
+msgstr "Ignorer"
+
+#: inc/admin-notice.php:123
+msgid "Insufficient permissions."
+msgstr "Permissions insuffisantes."
 
 #: inc/render-viewer.php:96
 msgid "Security Error:"
-msgstr "Erreur de sécurité :"
+msgstr "Erreur de sécurité :"
 
 #: inc/render-viewer.php:97
 msgid "PDF files must be hosted on the same domain as this site."

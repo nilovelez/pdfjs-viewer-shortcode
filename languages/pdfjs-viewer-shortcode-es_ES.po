@@ -216,9 +216,17 @@ msgstr "Insertar un PDF"
 msgid "Insert"
 msgstr "Insertar"
 
-#: templates/fullscreen.php:11
-msgid "PDF Viewer"
-msgstr "Visor de PDF"
+#: inc/admin-notice.php:51
+msgid "PDFjs Viewer has been updated.\\n\\nIf you edit a post that contains a PDF, you may see a message with an \\\"Attempt Block Recovery\\\" button. Simply click it—this is a normal part of how WordPress handles updates.\\n\\nIf you choose not to recover the block, your existing PDFs will still work perfectly, and your visitors won't see any changes."
+msgstr "PDFjs Viewer ha sido actualizado.\\n\\nSi editas una publicación que contiene un PDF, es posible que veas un mensaje con un botón \\\"Intentar recuperación de bloque\\\". Simplemente haz clic en él: esto es una parte normal de cómo WordPress maneja las actualizaciones.\\n\\nSi decides no recuperar el bloque, tus PDFs existentes seguirán funcionando perfectamente y tus visitantes no verán ningún cambio."
+
+#: inc/admin-notice.php:56
+msgid "Dismiss"
+msgstr "Descartar"
+
+#: inc/admin-notice.php:123
+msgid "Insufficient permissions."
+msgstr "Permisos insuficientes."
 
 #: inc/render-viewer.php:96
 msgid "Security Error:"

@@ -20,6 +20,13 @@ if ( ! defined( 'PDFJS_PLUGIN_VERSION' ) ) {
 	define( 'PDFJS_PLUGIN_VERSION', $plugin_data['Version'] );
 }
 
+// Admin notice control key: set to a non-empty string in releases
+// where you want to show the block recovery notice. Leave empty to disable.
+// Example: 'block-recovery-2025-12'. Users can still override via filter.
+if ( ! defined( 'PDFJS_NOTICE_KEY' ) ) {
+	define( 'PDFJS_NOTICE_KEY', 'block-recovery-2025-12' );
+}
+
 /**
  * Load plugin text domain for translations.
  */
@@ -71,3 +78,13 @@ $pdfjs_custom_page = get_option( 'pdfjs_custom_page', 0 );
 if ($pdfjs_custom_page) {
 	require 'inc/custom-page.php';
 }
+
+/**
+ * Admin Notices (version-tied dismissible banner)
+ */
+require 'inc/admin-notice.php';
+
+/**
+ * Activation hook: Mark current notice key as shown to avoid notice on fresh installs.
+ */
+register_activation_hook( __FILE__, 'pdfjs_notice_on_activate' );

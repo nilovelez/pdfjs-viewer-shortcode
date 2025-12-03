@@ -190,20 +190,20 @@ function pdfjs_render_viewer( $args ) {
 		$file_url_for_param = urlencode( $file_url );
 	}
 	$attachment_info = '?file=' . $file_url_for_param . '&attachment_id=' . $attachment_id;
-	$nonce     = wp_create_nonce( 'pdfjs_full_screen' );
 	// Note: pagemode is applied via JavaScript in viewer.php from the options page setting, not from URL
 	// Add zoom to URL hash only if non-default
 	$zoom_hash = '';
 	if ( ! empty( $zoom ) && 'auto' !== $zoom ) {
 		$zoom_hash = '#zoom=' . rawurlencode( $zoom );
 	}
-	$final_url = $viewer_base_url . $attachment_info . '&dButton=' . $download . '&pButton=' . $print . '&oButton=' . $openfile . '&sButton=' . $searchbutton . '&editButtons=' . $editingbuttons . '&_wpnonce=' . $nonce . $zoom_hash;
+	$final_url = $viewer_base_url . $attachment_info . '&dButton=' . $download . '&pButton=' . $print . '&oButton=' . $openfile . '&sButton=' . $searchbutton . '&editButtons=' . $editingbuttons . $zoom_hash;
 
 	// Build fullscreen link.
 	$fullscreen_link = '';
 	if ( 'true' === $fullscreen ) {
 		$fullscreen_aria = esc_attr__( 'Open PDF in fullscreen mode', 'pdfjs-viewer-shortcode' );
 		if ( $pdfjs_custom_page ) {
+			$nonce = wp_create_nonce( 'pdfjs_full_screen' );
 			$fullscreen_link = '<div class="pdfjs-fullscreen"><a href="?pdfjs_id=' . $attachment_id . '&_wpnonce=' . $nonce . '" ' . $fullscreen_target_attr . ' aria-label="' . $fullscreen_aria . '">' . esc_html( $fullscreen_text ) . '</a></div>';
 		} else {
 			$fullscreen_link = '<div class="pdfjs-fullscreen"><a href="' . esc_url( $final_url ) . '" ' . $fullscreen_target_attr . ' aria-label="' . $fullscreen_aria . '">' . esc_html( $fullscreen_text ) . '</a></div>';

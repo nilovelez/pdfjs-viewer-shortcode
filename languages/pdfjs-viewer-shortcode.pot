@@ -217,6 +217,18 @@ msgstr ""
 msgid "PDF Viewer"
 msgstr ""
 
+#: inc/admin-notice.php:51
+msgid "PDFjs Viewer has been updated.\\n\\nIf you edit a post that contains a PDF, you may see a message with an \\\"Attempt Block Recovery\\\" button. Simply click it—this is a normal part of how WordPress handles updates.\\n\\nIf you choose not to recover the block, your existing PDFs will still work perfectly, and your visitors won't see any changes."
+msgstr ""
+
+#: inc/admin-notice.php:56
+msgid "Dismiss"
+msgstr ""
+
+#: inc/admin-notice.php:123
+msgid "Insufficient permissions."
+msgstr ""
+
 #: inc/render-viewer.php:96
 msgid "Security Error:"
 msgstr ""
