@@ -96,6 +96,8 @@ This plugin can be installed either directly from your WordPress admin panel by 
 -   PDF preview in Gutenberg block
 -   Admin notice for block recovery after updates
 -   Accessibility improvements.
+-   Reworked the block editor PDF embed code.
+-   Options Page improvements.
 
 ### 2.2.3
 
