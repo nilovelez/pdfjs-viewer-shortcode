@@ -2,12 +2,12 @@
 
 -   Contributors: FalconerWeb, twistermc
 -   Tags: pdf, pdfjs, viewer, embed, mozilla
--   Requires at least: 4.9
--   Tested up to: 6.8.2
--   Stable tag: 2.2.4
+-   Requires at least: 5.0
+-   Tested up to: 6.9
+-   Stable tag: 3.0.0
 -   License: GPLv2 or later
 -   License URI: http://www.gnu.org/licenses/gpl-2.0.html
--   Requires PHP: 7.2
+-   Requires PHP: 7.4
 
 Embed a beautiful PDF viewer into pages.
 
@@ -58,11 +58,7 @@ Or use a direct URL:
 
 Want to help develop the plugin? Found a bug? [Find us on GitHub](https://github.com/TwisterMc/PDF.js-Viewer-Shortcode). For build instructions and contribution guidelines see the developer guide in `DEVELOPER.md`.
 
-## Invalid Block? Update it.
-
-Older blocks will be marked as _invalid_ in Gutenberg as we add new features. You just need to "[Attempt Block Recovery](https://www.kadenceblocks.com/docs/how-to-recover-a-broken-block/)" and that should update it.
-
-### Admin Notice After Updates
+### Admin Notice After Updates / Invalid Block
 
 When you update the plugin, editors may see an admin banner explaining that Gutenberg could show an “Attempt Block Recovery” prompt when editing older posts with PDFs. Clicking it updates the block format; it does not affect what visitors see. You can dismiss the banner, and it won’t reappear until a future release enables it again.
 
@@ -70,17 +66,24 @@ When you update the plugin, editors may see an admin banner explaining that Gute
 
 This plugin can be installed either directly from your WordPress admin panel by searching for **PDF.js Viewer**, or downloading from the Wordpress Plugin Repository and uploading and expanding the archive into your sites `wp-content/plugins` directory.
 
+## License
+
+This WordPress plugin is licensed under GPLv2 or later.
+
+PDF.js (included in this plugin) is developed by Mozilla and licensed under the Apache License 2.0. See the [PDF.js repository](https://github.com/mozilla/pdf.js) for details.
+
 ## Changelog
 
-### 2.2.4
+### 3.0.0
 
+-   Now requires WordPress 5.0 and PHP 7.4
 -   Upgraded PDFjs to PDF.js 5.4.456
 -   Added PDF preview in Gutenberg block
 -   Admin notice for block recovery after updates
 -   Accessibility improvements.
--   Reworked the block editor PDF embed code.
+-   Reworked the block editor PDF embed code
 -   Options Page improvements.
--   Added message so if the user is trying to load external PDFs, they'll get a warning.
+-   Added message so if the user is trying to load external PDFs, they'll get a warning
 -   Translation Support: Added internationalization support
     -   Included Spanish (es_ES) and French (fr_FR) translations
     -   Added translation template (POT file) for additional languages
