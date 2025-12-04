@@ -202,13 +202,10 @@ function pdfjs_render_viewer( $args ) {
 	// Include a nonce in the viewer URL to align with historical behavior
 	// and installations that may expect it.
 	$query_args['_wpnonce'] = wp_create_nonce( 'pdfjs_full_screen' );
-	// Note: pagemode is applied via JavaScript in viewer.php from the options page setting, not from URL
-	// Add zoom to URL hash only if non-default
-	$zoom_hash = '';
-	if ( ! empty( $zoom ) && 'auto' !== $zoom ) {
-		$zoom_hash = '#zoom=' . rawurlencode( $zoom );
-	}
-	$final_url = add_query_arg( $query_args, $viewer_base_url ) . $zoom_hash;
+	// Note: pagemode and zoom are applied via URL hash, PDF.js reads them from hash
+	// Always include both zoom and pagemode to override any stored preferences
+	$zoom_hash = 'zoom=' . rawurlencode( $zoom ) . '&pagemode=' . rawurlencode( $pagemode );
+	$final_url = add_query_arg( $query_args, $viewer_base_url ) . '#' . $zoom_hash;
 
 	// Build fullscreen link.
 	$fullscreen_link = '';

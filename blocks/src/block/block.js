@@ -157,9 +157,19 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 				attachment_id: props.attributes.imgID || '',
 				dButton: props.attributes.showDownload ? 'true' : 'false',
 				pButton: props.attributes.showPrint ? 'true' : 'false',
-				zoom: props.attributes.viewerScale || 'auto',
+				oButton: props.attributes.showOutline ? 'true' : 'false',
+				sButton: props.attributes.showSidebar ? 'true' : 'false',
+				editButtons: props.attributes.showEditButtons
+					? 'true'
+					: 'false',
 			} );
-			iframeSrc = `${ viewerBase }?${ params.toString() }`;
+			// Build hash with zoom and pagemode (always include to override stored preferences)
+			const zoom = props.attributes.viewerScale || 'auto';
+			const pagemode = 'none'; // Editor preview always uses 'none' for consistency
+			const hash = `zoom=${ encodeURIComponent(
+				zoom
+			) }&pagemode=${ encodeURIComponent( pagemode ) }`;
+			iframeSrc = `${ viewerBase }?${ params.toString() }#${ hash }`;
 		} else if ( props.attributes.imageURL ) {
 			iframeSrc = props.attributes.imageURL;
 		}
@@ -395,11 +405,9 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 					props.attributes.viewerHeight !== undefined
 						? props.attributes.viewerHeight
 						: defaultHeight
-				} url=${
-					props.attributes.imageURL
 				} download=${ props.attributes.showDownload.toString() } print=${ props.attributes.showPrint.toString() } fullscreen=${ props.attributes.showFullscreen.toString() } fullscreen_target=${ props.attributes.openFullscreen.toString() } fullscreen_text="${
 					props.attributes.fullscreenText
-				}" zoom=${ props.attributes.viewerScale.toString() }  ]` }
+				}" zoom=${ props.attributes.viewerScale.toString() }]` }
 			</div>
 		);
 	},

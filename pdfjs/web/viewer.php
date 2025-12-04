@@ -34,60 +34,6 @@ See https://github.com/adobe-type-tools/cmap-resources
     <link rel="stylesheet" href="viewer.css">
 
     <script src="viewer.js" type="module"></script>
-    <?php
-    // Read pagemode and zoom from options page settings (not from URL)
-    $pagemode = 'none'; // default
-    $zoom = null; // null means use URL hash or default
-    if ( defined( 'ABSPATH' ) && function_exists( 'get_option' ) ) {
-        $attachment_id = 0;
-        // First try to get from transient if attachment_id is provided
-        if ( isset( $_GET['attachment_id'] ) && ! empty( $_GET['attachment_id'] ) ) {
-            $attachment_id = absint( $_GET['attachment_id'] );
-            if ( function_exists( 'get_transient' ) ) {
-                $transient_pagemode = get_transient( 'pdfjs_button_pagemode_' . $attachment_id );
-                if ( false !== $transient_pagemode ) {
-                    $pagemode = $transient_pagemode;
-                }
-            }
-        }
-        // Fallback to global option from options page
-        if ( 'none' === $pagemode ) {
-            $global_pagemode = get_option( 'pdfjs_viewer_pagemode', 'none' );
-            if ( ! empty( $global_pagemode ) ) {
-                $pagemode = $global_pagemode;
-            }
-        }
-    }
-    // Apply pagemode via JavaScript after PDF loads
-    // Note: Zoom is handled via URL hash in render-viewer.php, PDF.js reads it automatically
-    if ( 'none' !== $pagemode && defined( 'ABSPATH' ) ) {
-        ?>
-    <script>
-    // Apply pagemode from options page setting
-    (function() {
-        function applyPageMode() {
-            if (typeof PDFViewerApplication !== 'undefined' && PDFViewerApplication.eventBus) {
-                PDFViewerApplication.eventBus.on('documentinit', function() {
-                    PDFViewerApplication.eventBus.dispatch('pagemode', {
-                        source: PDFViewerApplication,
-                        mode: <?php echo wp_json_encode( $pagemode ); ?>
-                    });
-                }, { once: true });
-            } else {
-                // Retry if PDFViewerApplication not ready yet
-                setTimeout(applyPageMode, 100);
-            }
-        }
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', applyPageMode);
-        } else {
-            applyPageMode();
-        }
-    })();
-    </script>
-    <?php
-    }
-    ?>
 </head>
 
   <body tabindex="0">
