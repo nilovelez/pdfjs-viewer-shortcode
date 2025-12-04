@@ -184,28 +184,6 @@ See https://github.com/adobe-type-tools/cmap-resources
               </div>
               <div id="toolbarViewerRight" class="toolbarHorizontalGroup">
                 <div id="editorModeButtons" class="toolbarHorizontalGroup" role="radiogroup" <?php if (isset($_GET["editButtons"]) && $_GET["editButtons"]!=="true") { echo 'style="display:none;"'; } ?>>
-                  <div id="editorComment" class="toolbarButtonWithContainer" hidden="true">
-                    <button id="editorCommentButton" class="toolbarButton" type="button" tabindex="0" disabled="disabled" role="radio" aria-expanded="false" aria-haspopup="true" aria-controls="editorCommentParamsToolbar" data-l10n-id="pdfjs-editor-comment-button">
-                      <span data-l10n-id="pdfjs-editor-comment-button-label"></span>
-                    </button>
-                    <div class="editorParamsToolbar hidden menu" id="editorCommentParamsToolbar">
-                      <div id="editorCommentsSidebar" class="menuContainer comment sidebar" role="landmark" aria-labelledby="editorCommentsSidebarHeader">
-                        <div id="editorCommentsSidebarResizer" class="sidebarResizer" role="separator" aria-controls="editorCommentsSidebar" tabindex="0"></div>
-                        <div id="editorCommentsSidebarHeader" role="heading" aria-level="2">
-                          <span class="commentCount">
-                            <span id="editorCommentsSidebarTitle" data-l10n-id="pdfjs-editor-comments-sidebar-title" data-l10n-args='{ "count": 0 }'></span>
-                            <span id="editorCommentsSidebarCount"></span>
-                          </span>
-                          <button id="editorCommentsSidebarCloseButton" type="button" tabindex="0" data-l10n-id="pdfjs-editor-comments-sidebar-close-button">
-                            <span data-l10n-id="pdfjs-editor-comments-sidebar-close-button-label"></span>
-                          </button>
-                        </div>
-                        <div id="editorCommentsSidebarListContainer" tabindex="-1">
-                          <ul id="editorCommentsSidebarList"></ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                   <div id="editorSignature" class="toolbarButtonWithContainer" hidden="true">
                     <button id="editorSignatureButton" class="toolbarButton" type="button" tabindex="0" disabled="disabled" role="radio" aria-expanded="false" aria-haspopup="true" aria-controls="editorSignatureParamsToolbar" data-l10n-id="pdfjs-editor-signature-button">
                       <span data-l10n-id="pdfjs-editor-signature-button-label"></span>
