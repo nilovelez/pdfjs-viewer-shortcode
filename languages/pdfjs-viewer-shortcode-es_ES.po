@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PDFjs Viewer - Embed PDFs 2.2.5\n"
 "Report-Msgid-Bugs-To: https://github.com/TwisterMc/PDF.js-Viewer-Shortcode/issues\n"
-"POT-Creation-Date: 2025-11-13 00:00:00+00:00\n"
-"PO-Revision-Date: 2025-11-13 00:00:00+00:00\n"
+"POT-Creation-Date: 2025-12-03 00:00:00+00:00\n"
+"PO-Revision-Date: 2025-12-03 00:00:00+00:00\n"
 "Last-Translator: \n"
 "Language-Team: Spanish\n"
 "Language: es_ES\n"
@@ -15,39 +15,157 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: inc/options-page.php:77
+msgid "You do not have sufficient permissions to access this page."
+msgstr "No tiene permisos suficientes para acceder a esta página."
+
+#: inc/options-page.php:81
+msgid "PDFjs Viewer Options"
+msgstr "Opciones del visor PDFjs"
+
+#: inc/options-page.php:103
+msgid "Defaults"
+msgstr "Valores predeterminados"
+
+#: inc/options-page.php:100
+msgid "These are the initial settings applied when a PDF is embedded. You can adjust them in the editor at any time. Updates to these default settings only apply to new PDF embeds, not existing ones."
+msgstr "Estas son la configuración inicial aplicada cuando se incrusta un PDF. Puede ajustarlas en el editor en cualquier momento. Las actualizaciones de esta configuración predeterminada solo se aplican a nuevas incrustaciones de PDF, no a las existentes."
+
+#: inc/options-page.php:111
+msgid "Show Save Button"
+msgstr "Mostrar botón Guardar"
+
+#: inc/options-page.php:116
+msgid "Show Print Button"
+msgstr "Mostrar botón Imprimir"
+
+#: inc/options-page.php:121
+msgid "Show Fullscreen Link"
+msgstr "Mostrar enlace Pantalla completa"
+
+#: inc/options-page.php:126
+msgid "Fullscreen Link Text"
+msgstr "Texto del enlace Pantalla completa"
+
+#: inc/options-page.php:131
+msgid "Fullscreen Links in New Tabs"
+msgstr "Enlaces de pantalla completa en nuevas pestañas"
+
+#: inc/options-page.php:136
+msgid "Embed Height"
+msgstr "Altura de incrustación"
+
+#: inc/options-page.php:141
+msgid "Embed Width"
+msgstr "Ancho de incrustación"
+
+#: inc/options-page.php:145
+msgid "Note: 0 = 100%"
+msgstr "Nota: 0 = 100%"
+
+#: inc/options-page.php:149
+msgid "Global Defaults"
+msgstr "Valores predeterminados globales"
+
+#: inc/options-page.php:150
+msgid "These settings control how all PDFs appear on your site. Any changes you make here will affect all PDFs that use PDF.js."
+msgstr "Esta configuración controla cómo aparecen todos los PDF en su sitio. Cualquier cambio que realice aquí afectará a todos los PDF que usan PDF.js."
+
+#: inc/options-page.php:154
+msgid "Show Search Button"
+msgstr "Mostrar botón Buscar"
+
+#: inc/options-page.php:159
+msgid "Show Editing Buttons"
+msgstr "Mostrar botones de edición"
+
+#: inc/options-page.php:164
+msgid "Viewer Scale"
+msgstr "Escala del visor"
+
+#: inc/options-page.php:166
+msgid "Auto"
+msgstr "Automático"
+
+#: inc/options-page.php:167
+msgid "Actual Size"
+msgstr "Tamaño real"
+
+#: inc/options-page.php:168
+msgid "Page Fit"
+msgstr "Ajuste de página"
+
+#: inc/options-page.php:169
+msgid "Page Width"
+msgstr "Ancho de página"
+
+#: inc/options-page.php:170
+msgid "50%"
+msgstr "50%"
+
+#: inc/options-page.php:171
+msgid "75%"
+msgstr "75%"
+
+#: inc/options-page.php:172
+msgid "100%"
+msgstr "100%"
+
+#: inc/options-page.php:173
+msgid "125%"
+msgstr "125%"
+
+#: inc/options-page.php:174
+msgid "150%"
+msgstr "150%"
+
+#: inc/options-page.php:175
+msgid "200%"
+msgstr "200%"
+
+#: inc/options-page.php:178
+msgid "Page Mode (aka Sidebar)"
+msgstr "Modo de página (barra lateral)"
+
+#: inc/options-page.php:180
+msgid "None"
+msgstr "Ninguno"
+
+#: inc/options-page.php:181
+msgid "Thumbs"
+msgstr "Miniaturas"
+
+#: inc/options-page.php:182
+msgid "Bookmarks"
+msgstr "Marcadores"
+
+#: inc/options-page.php:183
+msgid "Attachments"
+msgstr "Archivos adjuntos"
+
+#: inc/options-page.php:188
+msgid "Alternative PDF Loading"
+msgstr "Carga alternativa de PDF"
+
+#: inc/options-page.php:189
+msgid "Beta. Test with caution and"
+msgstr "Beta. Pruebe con cautela y"
+
+#: inc/options-page.php:183
+msgid "leave feedback"
+msgstr "dejar comentarios"
+
+#: inc/options-page.php:183
+msgid "on how it works."
+msgstr "sobre cómo funciona."
+
+#: inc/options-page.php:189
+msgid "When editing existing content, it may cause existing blocks to have \"unexpected or invalid content\" upon editing. Don't worry, just click the three little dots, choose \"Attempt Block Recovery\", and everything should be working again. This \"unexpected or invalid content\" will not affect live content, just content in the editor."
+msgstr "Al editar contenido existente, puede causar que los bloques existentes tengan \"contenido inesperado o inválido\" al editar. No se preocupe, simplemente haga clic en los tres puntitos, elija \"Intentar recuperación de bloque\", y todo debería funcionar de nuevo. Este \"contenido inesperado o inválido\" no afectará al contenido activo, solo al contenido en el editor."
+
 #: blocks/src/block/block.js:23
 msgid "Embed PDF.js Viewer"
 msgstr "Incrustar visor PDF.js"
-
-#: blocks/src/block/block.js:80
-msgid "PDF Selector"
-msgstr "Selector de PDF"
-
-#: blocks/src/block/block.js:173
-msgid "PDF.js Options"
-msgstr "Opciones de PDF.js"
-
-#: blocks/src/block/block.js:178
-msgid "Show Save Option"
-msgstr "Mostrar opción de guardar"
-
-#: blocks/src/block/block.js:182
-#: blocks/src/block/block.js:196
-#: blocks/src/block/block.js:210
-#: blocks/src/block/block.js:224
-msgid "Yes"
-msgstr "Sí"
-
-#: blocks/src/block/block.js:183
-#: blocks/src/block/block.js:197
-#: blocks/src/block/block.js:211
-#: blocks/src/block/block.js:225
-msgid "No"
-msgstr "No"
-
-#: blocks/src/block/block.js:192
-msgid "Show Print Option"
-msgstr "Mostrar opción de imprimir"
 
 #: blocks/src/block/block.js:206
 msgid "Show Fullscreen Option"
