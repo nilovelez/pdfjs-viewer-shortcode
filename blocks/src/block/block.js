@@ -164,7 +164,7 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 					pdfjsOpts.pdfjs_search_button === 'on' ? 'true' : 'false',
 			} );
 			// Build hash with zoom and pagemode (always include to override stored preferences)
-			const zoom = props.attributes.viewerScale || 'auto';
+			const zoom = pdfjsOpts.pdfjs_viewer_scale || 'auto';
 			const pagemode = pdfjsOpts.pdfjs_viewer_pagemode || 'none';
 			const hash = `zoom=${ encodeURIComponent(
 				zoom
@@ -407,7 +407,7 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 						: defaultHeight
 				} download=${ props.attributes.showDownload.toString() } print=${ props.attributes.showPrint.toString() } fullscreen=${ props.attributes.showFullscreen.toString() } fullscreen_target=${ props.attributes.openFullscreen.toString() } fullscreen_text="${
 					props.attributes.fullscreenText
-				}" zoom=${ props.attributes.viewerScale.toString() }]` }
+				}"]` }
 			</div>
 		);
 	},
