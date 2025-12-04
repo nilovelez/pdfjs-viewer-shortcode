@@ -4232,7 +4232,7 @@ class SandboxSupportBase {
     };
   }
 }
-;// ./src/pdf.sandbox.mjs
+;// ./src/pdf.sandbox.js
 
 
 

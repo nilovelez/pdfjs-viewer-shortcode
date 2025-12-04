@@ -21480,7 +21480,7 @@ class PDFWorker {
   static {
     if (isNodeJS) {
       this.#isWorkerDisabled = true;
-      GlobalWorkerOptions.workerSrc ||= "./pdf.worker.mjs";
+      GlobalWorkerOptions.workerSrc ||= "./pdf.worker.js";
     }
     this._isSameOrigin = (baseUrl, otherUrl) => {
       const base = URL.parse(baseUrl);
