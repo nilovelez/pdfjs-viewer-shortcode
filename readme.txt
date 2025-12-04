@@ -74,17 +74,22 @@ This plugin can be installed either directly from your WordPress admin panel by 
 
 ### 2.2.4
 
+-   Upgraded PDFjs to PDF.js 5.4.456
+-   Added PDF preview in Gutenberg block
+-   Admin notice for block recovery after updates
+-   Accessibility improvements.
+-   Reworked the block editor PDF embed code.
+-   Options Page improvements.
 -   Added message so if the user is trying to load external PDFs, they'll get a warning.
 -   Translation Support: Added internationalization support
     -   Included Spanish (es_ES) and French (fr_FR) translations
     -   Added translation template (POT file) for additional languages
     -   Added `load_plugin_textdomain()` for automatic translation loading
     -   Created translation guide in `languages/README.md`
--   Code Quality\* Fixed `window.pdfjs_options` undefined errors in block editor
-    -   Added safe fallback to prevent JavaScript errors when options not loaded
-    -   Improved attribute default handling in Gutenberg block
+-   Fixed `window.pdfjs_options` undefined errors in block editor
+-   Added safe fallback to prevent JavaScript errors when options not loaded
+-   Improved attribute default handling in Gutenberg block
 -   Added PDF preview in Gutenberg block editor
--   Added Viewer Scale option to settings page
 -   Consolidated rendering logic with new `pdfjs_render_viewer()` function
 -   Created `pdfjs_get_options()` helper for consistent option retrieval
 -   Added proper input sanitization with `pdfjs_sanitize_option()`
@@ -93,11 +98,7 @@ This plugin can be installed either directly from your WordPress admin panel by 
 -   Removed unused code and improved code organization
 -   Added `.nvmrc` for Node version management
 -   Fixed PHP Warning: Undefined array key "editButtons" thanks to retroflexer
--   PDF preview in Gutenberg block
--   Admin notice for block recovery after updates
--   Accessibility improvements.
--   Reworked the block editor PDF embed code.
--   Options Page improvements.
+-   Fixed issue where iFrames could break the layout on smaller screens
 
 ### 2.2.3
 

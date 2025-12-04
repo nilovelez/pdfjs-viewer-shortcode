@@ -98,6 +98,7 @@ This plugin can be installed either directly from your WordPress admin panel by 
 -   Removed unused code and improved code organization
 -   Added `.nvmrc` for Node version management
 -   Fixed PHP Warning: Undefined array key "editButtons" thanks to retroflexer
+-   Fixed issue where iFrames could break the layout on smaller screens
 
 ### 2.2.3
 

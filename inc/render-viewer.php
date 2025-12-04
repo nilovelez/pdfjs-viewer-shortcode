@@ -210,7 +210,7 @@ function pdfjs_render_viewer( $args ) {
 	);
 
 	// Build iframe with accessibility attributes.
-	$iframe_code = '<a href="#pdfjs-viewer-skip" class="screen-reader-text">' . esc_html__( 'Skip to PDF content', 'pdfjs-viewer-shortcode' ) . '</a><div role="region" aria-label="' . esc_attr__( 'PDF Viewer', 'pdfjs-viewer-shortcode' ) . '" id="pdfjs-viewer-skip"><iframe width="' . esc_attr( $viewer_width ) . '" height="' . esc_attr( $viewer_height ) . '" src="' . esc_url( $final_url ) . '" title="' . $iframe_title . '" aria-label="' . $iframe_title . '" class="pdfjs-iframe" tabindex="0" loading="lazy"></iframe></div>';
+	$iframe_code = '<a href="#pdfjs-viewer-skip" class="screen-reader-text">' . esc_html__( 'Skip to PDF content', 'pdfjs-viewer-shortcode' ) . '</a><div role="region" aria-label="' . esc_attr__( 'PDF Viewer', 'pdfjs-viewer-shortcode' ) . '" id="pdfjs-viewer-skip"><iframe width="' . esc_attr( $viewer_width ) . '" height="' . esc_attr( $viewer_height ) . '" src="' . esc_url( $final_url ) . '" title="' . $iframe_title . '" aria-label="' . $iframe_title . '" class="pdfjs-iframe" tabindex="0" loading="lazy" style="max-width: 100%;"></iframe></div>';
 
 	return $fullscreen_link . $iframe_code;
 }
