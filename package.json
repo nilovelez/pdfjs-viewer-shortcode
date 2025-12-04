@@ -35,7 +35,15 @@
 		"sass-loader": "^16.0.6"
 	},
 	"prettier": "@wordpress/prettier-config",
+	"overrides": {
+		"js-yaml": "^4.1.0",
+		"tmp": "^0.2.3",
+		"webpack-dev-server": "^5.2.1"
+	},
 	"resolutions": {
-		"form-data": ">=2.5.4"
+		"form-data": ">=2.5.4",
+		"js-yaml": ">=4.1.0",
+		"tmp": ">=0.2.3",
+		"webpack-dev-server": ">=5.2.1"
 	}
 }
