@@ -199,6 +199,9 @@ function pdfjs_render_viewer( $args ) {
 		'sButton'      => $searchbutton,
 		'editButtons'  => $editingbuttons,
 	);
+	// Include a nonce in the viewer URL to align with historical behavior
+	// and installations that may expect it.
+	$query_args['_wpnonce'] = wp_create_nonce( 'pdfjs_full_screen' );
 	// Note: pagemode is applied via JavaScript in viewer.php from the options page setting, not from URL
 	// Add zoom to URL hash only if non-default
 	$zoom_hash = '';
@@ -215,6 +218,7 @@ function pdfjs_render_viewer( $args ) {
 			$nonce = wp_create_nonce( 'pdfjs_full_screen' );
 			$fullscreen_link = '<div class="pdfjs-fullscreen"><a href="?pdfjs_id=' . $attachment_id . '&_wpnonce=' . $nonce . '" ' . $fullscreen_target_attr . ' aria-label="' . $fullscreen_aria . '">' . esc_html( $fullscreen_text ) . '</a></div>';
 		} else {
+			// Non-custom page fullscreen link uses the same viewer URL which now includes the nonce.
 			$fullscreen_link = '<div class="pdfjs-fullscreen"><a href="' . esc_url( $final_url ) . '" ' . $fullscreen_target_attr . ' aria-label="' . $fullscreen_aria . '">' . esc_html( $fullscreen_text ) . '</a></div>';
 		}
 	}
