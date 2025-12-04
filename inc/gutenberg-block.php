@@ -20,12 +20,15 @@ function pdfjs_get_options() {
 		'pdfjs_viewer_url'             => plugin_dir_url( dirname( __FILE__ ) ) . 'pdfjs/web/viewer.php',
 		'pdfjs_download_button'        => get_option( 'pdfjs_download_button', 'on' ),
 		'pdfjs_print_button'           => get_option( 'pdfjs_print_button', 'on' ),
+		'pdfjs_search_button'          => get_option( 'pdfjs_search_button', 'on' ),
+		'pdfjs_editing_buttons'        => get_option( 'pdfjs_editing_buttons', 'on' ),
 		'pdfjs_fullscreen_link'        => get_option( 'pdfjs_fullscreen_link', 'on' ),
 		'pdfjs_fullscreen_link_text'   => get_option( 'pdfjs_fullscreen_link_text', 'View Fullscreen' ),
 		'pdfjs_fullscreen_link_target' => get_option( 'pdfjs_fullscreen_link_target', '' ),
 		'pdfjs_embed_height'           => get_option( 'pdfjs_embed_height', 800 ),
 		'pdfjs_embed_width'            => get_option( 'pdfjs_embed_width', 0 ),
 		'pdfjs_viewer_scale'           => get_option( 'pdfjs_viewer_scale', 0 ),
+		'pdfjs_viewer_pagemode'        => get_option( 'pdfjs_viewer_pagemode', 'none' ),
 	);
 	
 	// Cache for 1 hour

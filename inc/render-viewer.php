@@ -35,34 +35,11 @@ function pdfjs_render_viewer( $args ) {
 		'openfile'          => 'false',
 		'zoom'              => 'auto',
 		'attachment_id'     => '',
+		'search'            => 'true',
+		'editing'           => 'true',
 	);
 
 	$args = wp_parse_args( $args, $defaults );
-
-	// Cache plugin options to avoid repeated DB queries on pages with multiple PDFs.
-	static $cached_pagemode = null;
-	static $cached_searchbutton = null;
-	static $cached_editingbuttons = null;
-	
-	if ( null === $cached_pagemode ) {
-		// Try object cache first
-		$cached_options = wp_cache_get( 'pdfjs_viewer_options', 'pdfjs' );
-		if ( false !== $cached_options ) {
-			$cached_pagemode = $cached_options['pagemode'];
-			$cached_searchbutton = $cached_options['searchbutton'];
-			$cached_editingbuttons = $cached_options['editingbuttons'];
-		} else {
-			$cached_pagemode = get_option( 'pdfjs_viewer_pagemode', 'none' );
-			$cached_searchbutton = get_option( 'pdfjs_search_button', 'on' );
-			$cached_editingbuttons = get_option( 'pdfjs_editing_buttons', 'on' );
-			// Cache for 1 hour
-			wp_cache_set( 'pdfjs_viewer_options', array(
-				'pagemode' => $cached_pagemode,
-				'searchbutton' => $cached_searchbutton,
-				'editingbuttons' => $cached_editingbuttons,
-			), 'pdfjs', 3600 );
-		}
-	}
 	
 	// Sanitize and validate inputs.
 	$viewer_base_url   = plugin_dir_url( dirname( __FILE__ ) ) . 'pdfjs/web/viewer.php';
@@ -75,9 +52,9 @@ function pdfjs_render_viewer( $args ) {
 	$print             = pdfjs_set_true_false( $args['print'] );
 	$openfile          = pdfjs_set_true_false( $args['openfile'] );
 	$zoom              = pdfjs_validate_zoom( $args['zoom'] );
-	$pagemode          = $cached_pagemode;
-	$searchbutton      = $cached_searchbutton;
-	$editingbuttons    = $cached_editingbuttons;
+	$pagemode          = sanitize_text_field( get_option( 'pdfjs_viewer_pagemode', 'none' ) );
+	$searchbutton      = pdfjs_set_true_false( $args['search'] );
+	$editingbuttons    = pdfjs_set_true_false( $args['editing'] );
 	
 	// Prioritize attachment_id over url for security
 	$attachment_id = pdfjs_sanitize_number( $args['attachment_id'] );
@@ -174,10 +151,6 @@ function pdfjs_render_viewer( $args ) {
 	if ( '0' === $viewer_height || 0 === $viewer_height ) {
 		$viewer_height = '800px';
 	}
-
-	// Convert 'on'/'off' to 'true'/'false' for search and editing buttons.
-	$searchbutton = ( 'on' === $searchbutton ) ? 'true' : 'false';
-	$editingbuttons = ( 'on' === $editingbuttons ) ? 'true' : 'false';
 
 	// Handle fullscreen target.
 	$fullscreen_target_attr = ( 'true' === $fullscreen_target ) ? 'target="_blank"' : '';

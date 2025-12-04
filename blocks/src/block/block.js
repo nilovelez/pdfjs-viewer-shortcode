@@ -157,15 +157,15 @@ registerBlockType( 'pdfjsblock/pdfjs-embed', {
 				attachment_id: props.attributes.imgID || '',
 				dButton: props.attributes.showDownload ? 'true' : 'false',
 				pButton: props.attributes.showPrint ? 'true' : 'false',
-				oButton: props.attributes.showOutline ? 'true' : 'false',
-				sButton: props.attributes.showSidebar ? 'true' : 'false',
-				editButtons: props.attributes.showEditButtons
-					? 'true'
-					: 'false',
+				oButton: 'false',
+				editButtons:
+					pdfjsOpts.pdfjs_editing_buttons === 'on' ? 'true' : 'false',
+				sButton:
+					pdfjsOpts.pdfjs_search_button === 'on' ? 'true' : 'false',
 			} );
 			// Build hash with zoom and pagemode (always include to override stored preferences)
 			const zoom = props.attributes.viewerScale || 'auto';
-			const pagemode = 'none'; // Editor preview always uses 'none' for consistency
+			const pagemode = pdfjsOpts.pdfjs_viewer_pagemode || 'none';
 			const hash = `zoom=${ encodeURIComponent(
 				zoom
 			) }&pagemode=${ encodeURIComponent( pagemode ) }`;

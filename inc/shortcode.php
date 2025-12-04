@@ -25,6 +25,8 @@ function pdfjs_handler( $incoming_from_post ) {
 	$default_fullscreen_target = get_option( 'pdfjs_fullscreen_link_target', '' );
 	$default_download = get_option( 'pdfjs_download_button', 'on' );
 	$default_print = get_option( 'pdfjs_print_button', 'on' );
+	$default_search = get_option( 'pdfjs_search_button', 'on' );
+	$default_editing = get_option( 'pdfjs_editing_buttons', 'on' );
 	
 	// Convert numeric defaults to strings with units
 	$default_height_str = is_numeric( $default_height ) ? $default_height . 'px' : ( $default_height ?: '800px' );
@@ -44,6 +46,8 @@ function pdfjs_handler( $incoming_from_post ) {
 			'openfile'          => 'false',
 			'zoom'              => $default_zoom,
 			'attachment_id'     => '',
+			'search'            => ( 'on' === $default_search ) ? 'true' : 'false',
+			'editing'           => ( 'on' === $default_editing ) ? 'true' : 'false',
 		),
 		$incoming_from_post
 	);
