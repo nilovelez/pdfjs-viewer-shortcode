@@ -5,10 +5,10 @@
 ?>
 <!DOCTYPE html>
 
-<html class="no-js" <?php language_attributes(); ?> dir="ltr" mozdisallowselectionprint>
+<html class="no-js" <?php language_attributes(); ?> mozdisallowselectionprint>
 
 	<head>
-		<title>PDFJS Viewer</title>
+		<title><?php esc_html_e( 'PDF Viewer', 'pdfjs-viewer-shortcode' ); ?></title>
 
 		<meta name="pdfjs" content="<?php echo esc_url( $pdfjs_url ); ?>">
 
@@ -26,7 +26,7 @@
 
 		<script>
 			setTimeout(function(){
-                PDFViewerApplication.open({"url": <?php echo esc_url( $pdfjs_url ); ?>})
+                PDFViewerApplication.open({"url": <?php echo wp_json_encode( $pdfjs_url ); ?>})
 			}, 100);
 		</script>
 
@@ -37,11 +37,20 @@
 		$button_zoom     = get_transient( 'pdfjs_button_zoom_' . $attachment_id );
 		$button_pagemode = get_transient( 'pdfjs_button_pagemode_' . $attachment_id );
 		$buttoon_search  = get_transient( 'pdfjs_button_searchbutton_' . $attachment_id );
+		
+		// Delete transients after reading to prevent database bloat.
+		delete_transient( 'pdfjs_button_download_' . $attachment_id );
+		delete_transient( 'pdfjs_button_print_' . $attachment_id );
+		delete_transient( 'pdfjs_button_openfile_' . $attachment_id );
+		delete_transient( 'pdfjs_button_zoom_' . $attachment_id );
+		delete_transient( 'pdfjs_button_pagemode_' . $attachment_id );
+		delete_transient( 'pdfjs_button_searchbutton_' . $attachment_id );
+		delete_transient( 'pdfjs_button_editingbuttons_' . $attachment_id );
 		?>
 
 	</head>
 
-    <body tabindex="1">
+    <body tabindex="0">
     <div id="outerContainer">
 
         <div id="sidebarContainer">

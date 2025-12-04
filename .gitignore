@@ -3,3 +3,13 @@
 /olaf-pdfjs-viewer-shortcode alias
 .history/*
 *.DS_Store
+
+# Build outputs
+/blocks/build/
+/blocks/dist/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

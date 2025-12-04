@@ -2,12 +2,12 @@
 
 -   Contributors: FalconerWeb, twistermc
 -   Tags: pdf, pdfjs, viewer, embed, mozilla
--   Requires at least: 4.9
--   Tested up to: 6.8.2
--   Stable tag: 2.2.3
+-   Requires at least: 5.0
+-   Tested up to: 6.9
+-   Stable tag: 3.0.0
 -   License: GPLv2 or later
 -   License URI: http://www.gnu.org/licenses/gpl-2.0.html
--   Requires PHP: 7.2
+-   Requires PHP: 7.4
 
 Embed a beautiful PDF viewer into pages.
 
@@ -18,6 +18,7 @@ Incorporate [Mozilla's PDF.js](https://github.com/mozilla/pdf.js/) viewer into y
 Features:
 
 -   Gutenberg Block and Shortcode
+-   Translation Support (plugin only): Spanish and French included, ready for more languages
 -   Elegant Theme that adapts to dark and light mode (if browser supports dynamic CSS)
 -   Customizable buttons
 -   Page navigation drawer
@@ -30,48 +31,100 @@ Features:
 
 Shortcode Syntax:
 
-`[pdfjs-viewer url=http://www.website.com/test.pdf viewer_width=600px viewer_height=700px fullscreen=true download=true print=true]`
+```
+[pdfjs-viewer attachment_id=123 viewer_width=600px viewer_height=700px fullscreen=true download=true print=true]
+```
 
--   `attachment_id` (required): ID of the media file in WordPress
--   `viewer_width` (optional): width of the viewer (default: 100%)
--   `viewer_height` (optional): height of the viewer (default: 800px)
--   `fullscreen` (optional): true/false, displays fullscreen link above viewer (default: true)
--   `fullscreen_text` (optional): text, change the fullscreen link text (default: View Fullscreen)
+Or use a direct URL:
+
+```
+[pdfjs-viewer url=http://www.website.com/test.pdf viewer_width=600px viewer_height=700px fullscreen=true download=true print=true]
+```
+
+**Shortcode Parameters:**
+
+-   `attachment_id` (recommended): ID of the media file in WordPress media library
+-   `url` (alternative): Direct URL to PDF file. Use `attachment_id` when possible for better security.
+-   `viewer_width` (optional): Width of the viewer (default: `100%`)
+-   `viewer_height` (optional): Height of the viewer (default: `800px`)
+-   `fullscreen` (optional): `true`/`false`, displays fullscreen link above viewer (default: `true`)
+-   `fullscreen_text` (optional): Text for the fullscreen link (default: `View Fullscreen`)
     -   Spaces not allowed. Use `%20` in place of spaces.
--   `fullscreen_target` (optional): true/false, open the fullscreen link in a new tab
--   `download` (optional): true/false, enables or disables download button (default: true)
--   `print` (optional): true/false, enables or disables print button (default: true)
+-   `fullscreen_target` (optional): `true`/`false`, open the fullscreen link in a new tab (default: `false`)
+-   `download` (optional): `true`/`false`, enables or disables download button (default: `true`)
+-   `print` (optional): `true`/`false`, enables or disables print button (default: `true`)
+-   `openfile` (optional): `true`/`false`, show open file button (default: `false`)
+-   `zoom` (optional): Initial zoom level - `auto`, `page-actual`, `page-fit`, `page-width`, or percentage like `75`, `100`, `150` (default: `auto`)
 
-Want to help develop the plugin? Found a bug? [Find us on GitHub](https://github.com/TwisterMc/PDF.js-Viewer-Shortcode).
+Want to help develop the plugin? Found a bug? [Find us on GitHub](https://github.com/TwisterMc/PDF.js-Viewer-Shortcode). For build instructions and contribution guidelines see the developer guide in `DEVELOPER.md`.
 
-## Invalid Block? Update it.
+### Admin Notice After Updates / Invalid Block
 
-Older blocks will be marked as _invalid_ in Gutenberg as we add new features. You just need to "[Attempt Block Recovery](https://www.kadenceblocks.com/docs/how-to-recover-a-broken-block/)" and that should update it.
+When you update the plugin, editors may see an admin banner explaining that Gutenberg could show an “Attempt Block Recovery” prompt when editing older posts with PDFs. Clicking it updates the block format; it does not affect what visitors see. You can dismiss the banner, and it won’t reappear until a future release enables it again.
 
 ## Installation
 
 This plugin can be installed either directly from your WordPress admin panel by searching for **PDF.js Viewer**, or downloading from the Wordpress Plugin Repository and uploading and expanding the archive into your sites `wp-content/plugins` directory.
 
+## License
+
+This WordPress plugin is licensed under GPLv2 or later.
+
+PDF.js (included in this plugin) is developed by Mozilla and licensed under the Apache License 2.0. See the [PDF.js repository](https://github.com/mozilla/pdf.js) for details.
+
 ## Changelog
 
+### 3.0.0
+
+-   Now requires WordPress 5.0 and PHP 7.4
+-   Upgraded PDFjs to PDF.js 5.4.456
+-   Added PDF preview in Gutenberg block
+-   Admin notice for block recovery after updates
+-   Accessibility improvements.
+-   Reworked the block editor PDF embed code
+-   Options Page improvements.
+-   Added message so if the user is trying to load external PDFs, they'll get a warning
+-   Translation Support: Added internationalization support
+    -   Included Spanish (es_ES) and French (fr_FR) translations
+    -   Added translation template (POT file) for additional languages
+    -   Added `load_plugin_textdomain()` for automatic translation loading
+    -   Created translation guide in `languages/README.md`
+-   Fixed `window.pdfjs_options` undefined errors in block editor
+-   Added safe fallback to prevent JavaScript errors when options not loaded
+-   Improved attribute default handling in Gutenberg block
+-   Added PDF preview in Gutenberg block editor
+-   Consolidated rendering logic with new `pdfjs_render_viewer()` function
+-   Created `pdfjs_get_options()` helper for consistent option retrieval
+-   Added proper input sanitization with `pdfjs_sanitize_option()`
+-   Fixed `pdfjs_viewer_scale` default from `0` to `auto`
+-   Updated build toolchain (Sass, webpack, Node 18+ requirement)
+-   Removed unused code and improved code organization
+-   Added `.nvmrc` for Node version management
+-   Fixed PHP Warning: Undefined array key "editButtons" thanks to retroflexer
+-   Fixed issue where iFrames could break the layout on smaller screens
+
 ### 2.2.3
-- Updated PDFjs to PDF.js 5.3.93
-- Merged 'Add toggle to disable editing buttons' PR
-- Merged 'Fix PHP Warnings: Undefined array key' PR
-- Package security updates / rebuild
+
+-   Updated PDFjs to PDF.js 5.3.93
+-   Merged 'Add toggle to disable editing buttons' PR
+-   Merged 'Fix PHP Warnings: Undefined array key' PR
+-   Package security updates / rebuild
 
 ### 2.2.2
-- PDFjs with legacy browser support
+
+-   PDFjs with legacy browser support
 
 ### 2.2.1
-- .mjs workaround
-- Updated to PDFjs 4.5.136
+
+-   .mjs workaround
+-   Updated to PDFjs 4.5.136
 
 ### 2.2
-- Updated to PDFjs 4.3.136
-- Renamed 'Download' to 'Save' based on PDFjs change.
-- Removed the zoom feature to hopefully fix Edge issues.
-- Disabling the Alternative PDF Loading version
+
+-   Updated to PDFjs 4.3.136
+-   Renamed 'Download' to 'Save' based on PDFjs change.
+-   Removed the zoom feature to hopefully fix Edge issues.
+-   Disabling the Alternative PDF Loading version
 
 ### 2.1.8
 

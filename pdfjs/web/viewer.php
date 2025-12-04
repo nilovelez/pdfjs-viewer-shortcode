@@ -703,7 +703,24 @@ See https://github.com/adobe-type-tools/cmap-resources
             </div>
         </dialog>
 
-        <dialog id="printServiceDialog" style="min-width: 200px;">
+        <dialog class="dialog commentManager" id="commentManagerDialog" aria-labelledby="commentManagerTitle">
+          <div class="mainContainer">
+            <div class="title" id="commentManagerToolbar">
+              <span id="commentManagerTitle" role="sectionhead" data-l10n-id="pdfjs-editor-edit-comment-dialog-title-when-adding"></span>
+            </div>
+            <textarea id="commentManagerTextInput" data-l10n-id="pdfjs-editor-edit-comment-dialog-text-input" tabindex="0"></textarea>
+            <div class="dialogButtonsGroup">
+              <button id="commentManagerCancelButton" type="button" class="secondaryButton" tabindex="0">
+                <span data-l10n-id="pdfjs-editor-edit-comment-dialog-cancel-button"></span>
+              </button>
+              <button id="commentManagerSaveButton" type="button" class="primaryButton" disabled tabindex="0">
+                <span data-l10n-id="pdfjs-editor-edit-comment-dialog-save-button-when-adding"></span>
+              </button>
+            </div>
+          </div>
+        </dialog>
+
+        <dialog id="printServiceDialog" style="min-width: 200px">
             <div class="row">
             <span data-l10n-id="pdfjs-print-progress-message"></span>
             </div>
