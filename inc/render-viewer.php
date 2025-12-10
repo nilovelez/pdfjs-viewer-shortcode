@@ -171,6 +171,7 @@ function pdfjs_render_viewer( $args ) {
 		'oButton'      => $openfile,
 		'sButton'      => $searchbutton,
 		'editButtons'  => $editingbuttons,
+		'v'            => defined( 'PDFJS_PLUGIN_VERSION' ) ? PDFJS_PLUGIN_VERSION : date( 'Ym' ),
 	);
 	// Include a nonce in the viewer URL to align with historical behavior
 	// and installations that may expect it.

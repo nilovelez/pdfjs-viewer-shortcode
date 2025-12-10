@@ -4,7 +4,7 @@
 -   Tags: pdf, pdfjs, viewer, embed, mozilla
 -   Requires at least: 5.0
 -   Tested up to: 6.9
--   Stable tag: 3.0.1
+-   Stable tag: 3.0.2
 -   License: GPLv2 or later
 -   License URI: http://www.gnu.org/licenses/gpl-2.0.html
 -   Requires PHP: 7.4
@@ -73,6 +73,10 @@ This WordPress plugin is licensed under GPLv2 or later.
 PDF.js (included in this plugin) is developed by Mozilla and licensed under the Apache License 2.0. See the [PDF.js repository](https://github.com/mozilla/pdf.js) for details.
 
 ## Changelog
+
+### 3.0.2
+
+-   Added cache busing to PDFjs files to prevent caching issues after updates
 
 ### 3.0.1
 
