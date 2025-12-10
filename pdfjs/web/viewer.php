@@ -20,6 +20,10 @@ Adobe CMap resources are covered by their own copyright but the same license:
 
 See https://github.com/adobe-type-tools/cmap-resources
 -->
+<?php
+  // Simple versioning to bust browser/CDN cache when plugin updates.
+  $asset_version = isset($_GET['v']) ? preg_replace('/[^a-zA-Z0-9._-]/', '', $_GET['v']) : '1.0';
+?>
 <html dir="ltr" mozdisallowselectionprint>
 <head>
     <meta charset="utf-8">
@@ -28,12 +32,12 @@ See https://github.com/adobe-type-tools/cmap-resources
     <title>PDF.js viewer</title>
 
     <!-- This snippet is used in production (included from viewer.html) -->
-    <link rel="resource" type="application/l10n" href="locale/locale.json">
-    <script src="../build/pdf.js" type="module"></script>
+    <link rel="resource" type="application/l10n" href="locale/locale.json?v=<?php echo $asset_version; ?>">
+    <script src="../build/pdf.js?v=<?php echo $asset_version; ?>" type="module"></script>
 
-    <link rel="stylesheet" href="viewer.css">
+    <link rel="stylesheet" href="viewer.css?v=<?php echo $asset_version; ?>">
 
-    <script src="viewer.js" type="module"></script>
+    <script src="viewer.js?v=<?php echo $asset_version; ?>" type="module"></script>
 </head>
 
   <body tabindex="0">
